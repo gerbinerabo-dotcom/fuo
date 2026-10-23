@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Calculator,
   Grid,
@@ -17,11 +17,17 @@ import {
 import { calculateBudget, calculateSafetyCushion, compareProductPrices } from '../../utils/gameRules';
 import { LAUNDRY_SYMBOLS, EMERGENCY_SCENARIOS, MONTH_SIM_EVENTS } from '../../data/toolboxData';
 import { sounds } from '../../utils/audio';
+import { useGame } from '../../context/GameContext';
 
 type ToolTab = 'budget' | 'matrix' | 'compare' | 'shopping' | 'star' | 'laundry' | 'emergency' | 'sim';
 
 export const ToolboxView: React.FC = () => {
+  const { advanceQuest } = useGame();
   const [activeTab, setActiveTab] = useState<ToolTab>('budget');
+
+  useEffect(() => {
+    advanceQuest('q2');
+  }, [advanceQuest]);
 
   // Budget state
   const [income, setIncome] = useState<number>(250000);

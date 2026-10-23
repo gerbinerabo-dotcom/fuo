@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { UserState, Lesson } from '../types';
 import { INITIAL_DAILY_QUESTS } from '../data/curriculum';
 import { sounds } from '../utils/audio';
@@ -57,6 +57,7 @@ interface GameContextType {
   loseHeart: () => boolean; // returns true if hearts left, false if 0
   refillHearts: () => void;
   claimChest: (chestId: string, gems: number) => void;
+  advanceQuest: (questId: string) => void;
   claimQuest: (questId: string) => void;
   buyShopItem: (itemId: string, cost: number) => { success: boolean; message: string };
   toggleNoPressureMode: () => void;
@@ -198,6 +199,17 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }));
   };
 
+  const advanceQuest = useCallback((questId: string) => {
+    setState((prev) => ({
+      ...prev,
+      dailyQuests: prev.dailyQuests.map((quest) =>
+        quest.id === questId && !quest.claimed
+          ? { ...quest, current: Math.min(quest.target, quest.current + 1) }
+          : quest
+      )
+    }));
+  }, []);
+
   const claimQuest = (questId: string) => {
     setState((prev) => {
       const quest = prev.dailyQuests.find((q) => q.id === questId);
@@ -295,6 +307,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loseHeart,
         refillHearts,
         claimChest,
+        advanceQuest,
         claimQuest,
         buyShopItem,
         toggleNoPressureMode,

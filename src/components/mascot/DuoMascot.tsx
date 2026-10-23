@@ -31,9 +31,12 @@ export const DuoMascot: React.FC<MascotProps> = ({
         </div>
       )}
 
-      {/* Mascot Animated Character (Finn the Mint Owl / Cat Guide) */}
+      {/* Mint cat guide */}
       <div className={`${sizeMap[size]} transition-transform duration-300 hover:scale-105 active:scale-95`}>
         <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
+          {/* Curled tail */}
+          <path d="M 78 77 C 96 76 94 54 82 56" fill="none" stroke="var(--color-emerald-700)" strokeWidth="8" strokeLinecap="round" />
+
           {/* Body */}
           <rect
             x="14"
@@ -52,15 +55,17 @@ export const DuoMascot: React.FC<MascotProps> = ({
             className="fill-emerald-200 dark:fill-emerald-300"
           />
 
-          {/* Ears / Feathers on top */}
+          {/* Cat ears */}
           <path
-            d="M 22 25 Q 16 8 32 18 Z"
+            d="M 21 33 L 18 8 Q 30 13 40 25 Z"
             className="fill-emerald-600"
           />
           <path
-            d="M 78 25 Q 84 8 68 18 Z"
+            d="M 79 33 L 82 8 Q 70 13 60 25 Z"
             className="fill-emerald-600"
           />
+          <path d="M 24 25 L 22 14 Q 29 18 34 25 Z" className="fill-rose-300" />
+          <path d="M 76 25 L 78 14 Q 71 18 66 25 Z" className="fill-rose-300" />
 
           {/* Eyes Base */}
           <circle cx="35" cy="40" r="14" className="fill-white" />
@@ -123,19 +128,18 @@ export const DuoMascot: React.FC<MascotProps> = ({
             </>
           )}
 
-          {/* Cute Orange Beak */}
-          <polygon
-            points="50,46 42,54 58,54"
-            className="fill-amber-500 stroke-amber-600 stroke-[1.5]"
-          />
+          {/* Cat nose, mouth, and whiskers */}
+          <path d="M 45 51 Q 50 47 55 51 Q 50 57 45 51 Z" className="fill-rose-400" />
+          <path d="M 50 55 L 50 59 M 50 59 Q 46 63 43 60 M 50 59 Q 54 63 57 60" fill="none" stroke="#064E3B" strokeWidth="2" strokeLinecap="round" />
+          <path d="M 31 55 L 15 52 M 31 59 L 14 61 M 69 55 L 85 52 M 69 59 L 86 61" fill="none" stroke="var(--color-emerald-800)" strokeWidth="1.5" strokeLinecap="round" />
 
-          {/* Little Wings */}
+          {/* Little paws */}
           <path
-            d="M 14 55 Q 6 62 14 74 Q 20 65 18 55 Z"
+            d="M 15 58 Q 7 67 15 76 Q 21 78 22 69 L 20 58 Z"
             className="fill-emerald-600"
           />
           <path
-            d="M 86 55 Q 94 62 86 74 Q 80 65 82 55 Z"
+            d="M 85 58 Q 93 67 85 76 Q 79 78 78 69 L 80 58 Z"
             className="fill-emerald-600"
           />
 

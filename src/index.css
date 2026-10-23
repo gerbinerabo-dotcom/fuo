@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --color-primary: #10b981;
+    --color-primary-dark: #047857;
+    --color-primary-soft: #ecfdf5;
+    --color-primary-strong: #065f46;
+  }
+
+  [data-theme="ocean-blue"] {
+    --color-primary: #0284c7;
+    --color-primary-dark: #0369a1;
+    --color-primary-soft: #f0f9ff;
+    --color-primary-strong: #075985;
+  }
+
+  [data-theme="midnight"] {
+    color-scheme: dark;
+    --color-primary: #38bdf8;
+    --color-primary-dark: #0284c7;
+    --color-primary-soft: #082f49;
+    --color-primary-strong: #bae6fd;
+  }
+
+  [data-theme="sunset"] {
+    --color-primary: #ea580c;
+    --color-primary-dark: #c2410c;
+    --color-primary-soft: #fff7ed;
+    --color-primary-strong: #9a3412;
+  }
+
+  [data-theme="lavender"] {
+    --color-primary: #7c3aed;
+    --color-primary-dark: #6d28d9;
+    --color-primary-soft: #f5f3ff;
+    --color-primary-strong: #5b21b6;
+  }
+
+  body {
+    font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Theme the shared accent utilities used across buttons, progress, and selection. */
+@layer utilities {
+  .bg-emerald-500 { background-color: var(--color-primary); }
+  .bg-emerald-600 { background-color: var(--color-primary-dark); }
+  .bg-emerald-50 { background-color: var(--color-primary-soft); }
+  .text-emerald-500, .text-emerald-600, .text-emerald-700 { color: var(--color-primary); }
+  .text-emerald-800 { color: var(--color-primary-strong); }
+  .border-emerald-500 { border-color: var(--color-primary); }
+  .ring-emerald-500 { --tw-ring-color: var(--color-primary); }
+  .accent-emerald-500 { accent-color: var(--color-primary); }
+  .hover\:bg-emerald-600:hover { background-color: var(--color-primary-dark); }
+  .hover\:bg-emerald-500:hover { background-color: var(--color-primary); }
+  .theme-selected-theme {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary-strong);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-4px);
+  }
+  40%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+.animate-shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+/* Hide scrollbar for tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

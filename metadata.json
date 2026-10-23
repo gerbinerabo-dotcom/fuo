@@ -1,0 +1,7 @@
+{
+  "name": "LifeSkill — Дуолинго для взрослой жизни",
+  "description": "Геймифицированная интерактивная школа взрослой жизни в стиле Duolingo: финансы, карьера, быт, тайм-менеджмент, симуляторы и практический тулбокс.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

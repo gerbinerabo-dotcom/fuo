@@ -1,0 +1,20 @@
+{
+  "name": "lifeskill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LifeSkill personal learning app with secure email OTP accounts",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js && node auth.test.js && node server.test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "12.4.1",
+    "dotenv": "16.4.7",
+    "nodemailer": "10.0.6"
+  }
+}
+

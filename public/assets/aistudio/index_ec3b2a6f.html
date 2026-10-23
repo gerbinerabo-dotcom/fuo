@@ -1,0 +1,3328 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F4F9F6">
+  <meta name="description" content="LifeSkill — интерактивная школа взрослой жизни с элементами RPG и симулятора в стиле Fresh Mint">
+  <title>LifeSkill — Школа взрослой жизни</title>
+
+  <style>
+     /* Six themes share one semantic token contract. */
+    :root {
+      color-scheme: light;
+      --color-bg: #F4F9F6;
+      --color-primary: #059669;
+      --color-primary-hover: #047857;
+      --color-mint-light: #D1FAE5;
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #F0FDF4;
+      --color-surface-hover: #E6F4ED;
+      --color-text: #1F2937;
+      --color-text-secondary: #64748B;
+      --color-border: #DDE8E1;
+      --color-selected: #ECFDF5;
+      --color-success: #047857;
+      --color-success-light: #ECFDF5;
+      --color-danger: #DC2626;
+      --color-danger-light: #FEF2F2;
+      --color-gold: #D97706;
+      --color-gold-light: #FEF3C7;
+      --color-orange: #EA580C;
+      --color-on-primary: #FFFFFF;
+      --color-on-success: #FFFFFF;
+      --color-on-danger: #FFFFFF;
+      --radius-card: 8px;
+      --radius-button: 8px;
+      --radius-sm: 8px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(5, 150, 105, 0.05);
+      --shadow: 0 2px 10px rgba(27, 43, 34, 0.035);
+      --shadow-lg: 0 8px 24px rgba(27, 43, 34, 0.12);
+    }
+
+    [data-theme="fresh-mint"] { color-scheme: light; }
+
+    [data-theme="light-classic"] {
+      color-scheme: light;
+      --color-bg: #F8FAFC;
+      --color-primary: #2563EB;
+      --color-primary-hover: #1D4ED8;
+      --color-mint-light: #DBEAFE;
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #F1F5F9;
+      --color-surface-hover: #E2E8F0;
+      --color-text: #1E293B;
+      --color-text-secondary: #64748B;
+      --color-border: #E2E8F0;
+      --color-selected: #EFF6FF;
+      --color-success: #047857;
+      --color-success-light: #ECFDF5;
+      --color-danger: #DC2626;
+      --color-danger-light: #FEF2F2;
+      --color-gold: #B45309;
+      --color-gold-light: #FEF3C7;
+      --color-orange: #EA580C;
+      --color-on-primary: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(30, 41, 59, 0.05);
+      --shadow: 0 2px 10px rgba(30, 41, 59, 0.04);
+      --shadow-lg: 0 8px 24px rgba(30, 41, 59, 0.12);
+    }
+
+    [data-theme="midnight"] {
+      color-scheme: dark;
+      --color-bg: #111827;
+      --color-primary: #34D399;
+      --color-primary-hover: #6EE7B7;
+      --color-mint-light: #163D30;
+      --color-surface: #1F2937;
+      --color-surface-subtle: #273449;
+      --color-surface-hover: #334155;
+      --color-text: #F9FAFB;
+      --color-text-secondary: #9CA3AF;
+      --color-border: #374151;
+      --color-selected: #163D30;
+      --color-success: #34D399;
+      --color-success-light: #163D30;
+      --color-danger: #F87171;
+      --color-danger-light: #3B1E26;
+      --color-gold: #FBBF24;
+      --color-gold-light: #3A2F16;
+      --color-orange: #FB923C;
+      --color-on-primary: #10251E;
+      --color-on-success: #10251E;
+      --color-on-danger: #3F0B0B;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="ocean-blue"] {
+      color-scheme: light;
+      --color-bg: #F0F9FF;
+      --color-primary: #0284C7;
+      --color-primary-hover: #0369A1;
+      --color-mint-light: #E0F2FE;
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #F0F9FF;
+      --color-surface-hover: #E0F2FE;
+      --color-text: #0F172A;
+      --color-text-secondary: #64748B;
+      --color-border: #BAE6FD;
+      --color-selected: #E0F2FE;
+      --color-success: #047857;
+      --color-success-light: #ECFDF5;
+      --color-danger: #DC2626;
+      --color-danger-light: #FEF2F2;
+      --color-gold: #B45309;
+      --color-gold-light: #FEF3C7;
+      --color-orange: #EA580C;
+      --color-on-primary: #082F49;
+      --shadow-sm: 0 2px 8px rgba(2, 132, 199, 0.06);
+      --shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    [data-theme="lavender-dream"] {
+      color-scheme: light;
+      --color-bg: #F7F5FF;
+      --color-primary: #7C3AED;
+      --color-primary-hover: #6D28D9;
+      --color-mint-light: #EDE9FE;
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #F5F3FF;
+      --color-surface-hover: #EDE9FE;
+      --color-text: #2E2447;
+      --color-text-secondary: #6B6480;
+      --color-border: #DDD6FE;
+      --color-selected: #EDE9FE;
+      --color-success: #047857;
+      --color-success-light: #ECFDF5;
+      --color-danger: #DC2626;
+      --color-danger-light: #FEF2F2;
+      --color-gold: #B45309;
+      --color-gold-light: #FEF3C7;
+      --color-orange: #EA580C;
+      --color-on-primary: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(124, 58, 237, 0.05);
+      --shadow: 0 2px 10px rgba(46, 36, 71, 0.04);
+      --shadow-lg: 0 8px 24px rgba(46, 36, 71, 0.12);
+    }
+
+    [data-theme="sunset"] {
+      color-scheme: light;
+      --color-bg: #FFF8F1;
+      --color-primary: #EA580C;
+      --color-primary-hover: #C2410C;
+      --color-mint-light: #FFEDD5;
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #FFF7ED;
+      --color-surface-hover: #FFEDD5;
+      --color-text: #292524;
+      --color-text-secondary: #78716C;
+      --color-border: #FED7AA;
+      --color-selected: #FFEDD5;
+      --color-success: #047857;
+      --color-success-light: #ECFDF5;
+      --color-danger: #DC2626;
+      --color-danger-light: #FEF2F2;
+      --color-gold: #B45309;
+      --color-gold-light: #FEF3C7;
+      --color-orange: #EA580C;
+      --color-on-primary: #431407;
+      --shadow-sm: 0 2px 8px rgba(234, 88, 12, 0.05);
+      --shadow: 0 2px 10px rgba(41, 37, 36, 0.04);
+      --shadow-lg: 0 8px 24px rgba(41, 37, 36, 0.12);
+    }
+
+    [data-motion="reduced"] *, [data-motion="reduced"] *::before, [data-motion="reduced"] *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font: 15px/1.55 "Trebuchet MS", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .ls-icon { display:inline-block; vertical-align:middle; flex:0 0 auto; color:currentColor; }
+    .nav-btn .ls-icon { width:20px; height:20px; }
+    .stat-pill .ls-icon { width:16px; height:16px; }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    /* TOP HEADER */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 68px;
+      background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(20px, calc((100vw - 1200px) / 2));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: -0.8px;
+      color: var(--color-primary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      background: var(--color-mint-light);
+      color: var(--color-primary);
+      border-radius: var(--radius-pill);
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .top-stats {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-pill.heart-pill { color: var(--color-danger); }
+    .stat-pill.coin-pill  { color: var(--color-gold); }
+    .stat-pill.streak-pill { color: var(--color-gold); }
+    .stat-pill.xp-pill { color: var(--color-primary); }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-button);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .icon-btn:hover {
+      background: var(--color-selected);
+      color: var(--color-primary);
+      transform: translateY(-1px);
+    }
+
+    /* MAIN APP LAYOUT */
+    .app-layout {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 100px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 28px;
+      flex: 1;
+    }
+
+    /* DESKTOP SIDEBAR */
+    .sidebar {
+      position: sticky;
+      top: 92px;
+      height: fit-content;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-button);
+      color: var(--color-text-secondary);
+      font-weight: 750;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .nav-btn span {
+      font-size: 20px;
+      display: inline-block;
+      width: 24px;
+      text-align: center;
+    }
+
+    .nav-btn:hover {
+      background: var(--color-selected);
+      color: var(--color-primary);
+      transform: translateX(3px);
+    }
+
+    .nav-btn.active {
+      background: var(--color-mint-light);
+      color: var(--color-primary);
+      box-shadow: inset 3px 0 0 var(--color-primary);
+    }
+
+    /* MOBILE BOTTOM NAV */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid var(--color-border);
+      padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+      z-index: 99;
+      justify-content: space-around;
+    }
+
+    .mobile-nav .nav-btn {
+      flex-direction: column;
+      gap: 3px;
+      padding: 6px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .mobile-nav .nav-btn span {
+      font-size: 19px;
+      width: auto;
+    }
+
+    .mobile-nav .nav-btn.active {
+      background: transparent;
+      color: var(--color-primary);
+      box-shadow: none;
+    }
+
+    /* MAIN CONTENT AREA */
+    .content-area {
+      min-width: 0;
+    }
+
+    .page-title {
+      margin-bottom: 22px;
+    }
+
+    .page-title h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .page-title p {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+    }
+
+    /* CARDS & GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .col-12 { grid-column: span 12; }
+    .col-8  { grid-column: span 8; }
+    .col-7  { grid-column: span 7; }
+    .col-6  { grid-column: span 6; }
+    .col-5  { grid-column: span 5; }
+    .col-4  { grid-column: span 4; }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .card-hero {
+      background: var(--color-selected);
+      border: 1px solid color-mix(in srgb, var(--color-primary) 30%, var(--color-border));
+      overflow: hidden;
+    }
+
+    .card-hero::after {
+      display: none;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      font-weight: 800;
+      font-size: 14px;
+      border-radius: var(--radius-button);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);
+    }
+
+    .btn:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-alt {
+      background: var(--color-surface-subtle);
+      color: var(--color-text);
+      box-shadow: none;
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-alt:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-primary);
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 10px;
+    }
+
+    .btn-danger {
+      background: var(--color-danger);
+      color: var(--color-on-danger);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--color-danger) 30%, transparent);
+    }
+
+    /* PROGRESS TRACKS & METERS */
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--color-selected);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin: 8px 0;
+      border: 1px solid var(--color-border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-pill);
+      transition: width 0.4s ease;
+    }
+
+    .hero-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    .mini-stat-box {
+      background: color-mix(in srgb, var(--color-surface) 85%, var(--color-selected));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-button);
+      padding: 10px 14px;
+      min-width: 110px;
+    }
+
+    .mini-stat-box b {
+      display: block;
+      font-size: 18px;
+      font-weight: 850;
+      color: var(--color-text);
+    }
+
+    .mini-stat-box small {
+      color: var(--color-text-secondary);
+      font-size: 12px;
+    }
+
+    /* AVATAR BOX */
+    .avatar-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--avatar-tint, var(--color-mint-light)) 34%, var(--color-surface));
+      border: 2px solid color-mix(in srgb, var(--avatar-tint, var(--color-mint-light)) 72%, var(--color-border));
+      display: grid;
+      place-items: center;
+      font-size: 50px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow);
+    }
+
+    .avatar-base { line-height: 1; }
+    .avatar-item { position: absolute; font-size: 21px; background: var(--color-surface); border-radius: 50%; padding: 2px; box-shadow: var(--shadow-sm); }
+    .avatar-clothes { left: -7px; bottom: 4px; }
+    .avatar-accessory { right: 4px; top: 2px; }
+    .avatar-wrapper.profile-avatar-soft { border-radius: 30px; box-shadow: none; }
+    .avatar-wrapper.profile-avatar-outlined { background: var(--color-surface); border-width: 3px; box-shadow: none; }
+
+    .avatar-companion {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      font-size: 26px;
+      background: var(--color-surface);
+      border-radius: 50%;
+      padding: 2px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-photo { position:relative; width:54px; height:54px; flex:0 0 auto; border-radius:50%; overflow:hidden; display:grid; place-items:center; background:var(--color-selected); color:var(--color-primary); font-weight:800; border:2px solid var(--color-border); }
+    .profile-photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .profile-photo-small { width:38px; height:38px; font-size:15px; margin-right:6px; }
+    .profile-photo-large { width:108px; height:108px; font-size:30px; }
+    .home-welcome { display:flex; align-items:center; gap:12px; }
+    .home-welcome .kicker { margin-bottom:2px; }
+    .home-welcome h1 { font-size:25px; margin-bottom:2px; }
+    .home-dashboard { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,320px); gap:18px; align-items:start; }
+    .home-primary, .home-aside { display:grid; gap:16px; min-width:0; }
+    .learning-continue-card { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:24px; background:var(--color-selected); border-color:color-mix(in srgb,var(--color-primary) 28%,var(--color-border)); }
+    .continue-copy { min-width:0; flex:1; }
+    .continue-copy h2 { font-size:24px; line-height:1.28; margin-bottom:6px; overflow-wrap:anywhere; }
+    .continue-copy > p { color:var(--color-text-secondary); margin-bottom:14px; }
+    .continue-progress-label, .world-summary-progress, .rank-progress-label { display:flex; justify-content:space-between; gap:8px; color:var(--color-text-secondary); font-size:12px; }
+    .continue-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:16px; flex-wrap:wrap; }
+    .continue-level { display:flex; align-items:center; gap:8px; }
+    .continue-level > span:last-child { display:grid; font-size:12px; }
+    .continue-level small { color:var(--color-text-secondary); }
+    .level-mark { width:38px; height:38px; display:grid; place-items:center; color:var(--color-on-primary); background:var(--color-primary); border-radius:12px; font-size:17px; font-weight:800; }
+    .home-section { min-width:0; }
+    .home-section-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .home-section-heading h2 { margin:0; font-size:20px; }
+    .world-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .world-summary { min-width:0; padding:14px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); }
+    .world-summary h3 { min-height:40px; margin:8px 0; line-height:1.3; overflow-wrap:anywhere; }
+    .world-summary-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .world-icon { width:36px; height:36px; display:grid; place-items:center; background:var(--color-selected); border-radius:10px; font-size:20px; }
+    .world-status { color:var(--color-text-secondary); font-size:11px; }
+    .world-status.is-active { color:var(--color-primary-hover); }
+    .world-status.is-complete { color:var(--color-success); }
+    .world-summary .progress-track { height:6px; margin:6px 0 10px; }
+    .world-summary .btn { width:100%; }
+    .mission-card .btn { width:100%; margin-top:12px; }
+    .mission-intro { margin:-4px 0 12px; color:var(--color-text-secondary); font-size:13px; }
+    .mission-count { display:grid; place-items:center; width:36px; height:36px; background:var(--color-selected); color:var(--color-primary); border-radius:50%; font-weight:800; }
+    .mission-row { display:flex; gap:10px; padding:12px 0; border-top:1px solid var(--color-border); }
+    .mission-check { flex:0 0 24px; height:24px; display:grid; place-items:center; border:1px solid var(--color-border); border-radius:7px; color:var(--color-text-secondary); font-size:12px; font-weight:800; }
+    .mission-done .mission-check { background:var(--color-success-light); border-color:var(--color-success); color:var(--color-success); }
+    .mission-copy { display:grid; gap:2px; min-width:0; }
+    .mission-copy b { font-size:13px; line-height:1.3; }
+    .mission-copy small, .mission-progress-text { color:var(--color-text-secondary); font-size:11px; }
+    .mission-progress-text { color:var(--color-primary-hover); }
+    .mission-reward { margin-top:10px; padding:10px; background:var(--color-surface-subtle); border-radius:var(--radius-sm); font-size:12px; color:var(--color-text-secondary); }
+    .mission-reward b { display:block; color:var(--color-text); margin-top:2px; }
+    .mission-claimed { margin-top:12px; padding:10px; border-radius:var(--radius-sm); color:var(--color-success); background:var(--color-success-light); font-size:13px; font-weight:700; }
+    .rank-card h2 { font-size:17px; line-height:1.35; }
+    .rank-card .progress-track { height:7px; }
+    .rank-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; color:var(--color-text-secondary); font-size:11px; }
+    .skills-details { margin-top:12px; border-top:1px solid var(--color-border); padding-top:10px; }
+    .skills-details summary { cursor:pointer; color:var(--color-primary); font-weight:750; }
+    .skills-list { display:grid; gap:7px; margin-top:10px; }
+    .skills-list > div { display:flex; justify-content:space-between; gap:8px; font-size:12px; }
+    .quick-route-grid { display:grid; grid-template-columns:1fr; gap:10px; }
+    .quick-route { display:grid; grid-template-columns:32px minmax(0,1fr); grid-template-rows:auto auto auto; column-gap:9px; align-items:center; padding:13px; text-align:left; color:var(--color-text); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); }
+    .quick-route:hover { border-color:var(--color-primary); background:var(--color-selected); }
+    .quick-route > span:first-child { grid-row:1 / span 3; font-size:22px; }
+    .quick-route b { font-size:13px; }
+    .quick-route small { color:var(--color-text-secondary); font-size:11px; }
+    .quick-route .progress-track { height:5px; margin:7px 0; }
+    .quick-route-action { color:var(--color-primary); font-size:11px; font-weight:750; }
+    .photo-editor-card { width:min(480px,100%); }
+    .photo-crop-frame { width:min(300px,78vw); aspect-ratio:1; margin:14px auto; overflow:hidden; border-radius:50%; background:var(--color-surface-subtle); touch-action:none; cursor:grab; }
+    .photo-crop-frame:active { cursor:grabbing; }
+    #photo-crop-canvas { display:block; width:100%; height:100%; }
+    .photo-editor-controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .photo-editor-error { color:var(--color-danger); min-height:20px; font-size:13px; }
+
+    .profile-hero { display:flex; align-items:center; gap:18px; min-width:0; }
+    .profile-identity { min-width:0; }
+    .profile-identity h2 { overflow-wrap:anywhere; margin:2px 0 4px; }
+    .profile-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .profile-card-soft { background:var(--color-selected); border-color:color-mix(in srgb, var(--color-primary) 28%, var(--color-border)); box-shadow:none; }
+    .profile-card-outlined { border:2px solid var(--color-primary); box-shadow:none; }
+    .profile-stat { padding:12px 0; border-bottom:1px solid var(--color-border); }
+    .profile-stat:last-child { border-bottom:0; }
+    .profile-skills { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; }
+    .profile-skill { padding:12px; background:var(--color-surface-subtle); border-radius:var(--radius-sm); }
+    .theme-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .theme-choice { display:block; width:100%; padding:10px; text-align:left; color:var(--color-text); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); }
+    .theme-choice:hover, .theme-choice.selected { border-color:var(--color-primary); background:var(--color-selected); }
+    .theme-sample { height:42px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:4px; padding:5px; margin-bottom:8px; border:1px solid var(--color-border); border-radius:6px; }
+    .theme-sample span { border-radius:3px; }
+    .theme-choice-status { display:inline-block; margin-top:6px; font-size:12px; font-weight:750; color:var(--color-primary); }
+    .profile-editor-modal { align-items:start; overflow-y:auto; padding-top:max(16px,env(safe-area-inset-top)); padding-bottom:max(16px,env(safe-area-inset-bottom)); }
+    .profile-editor-card { max-height:none; margin:auto; }
+    .profile-editor-layout { display:grid; grid-template-columns:minmax(0,1fr) 180px; gap:18px; }
+    .profile-editor-preview { position:sticky; top:0; align-self:start; display:grid; justify-items:center; gap:8px; padding:12px; background:var(--color-surface-subtle); border-radius:var(--radius-sm); }
+    .avatar-color-options { display:flex; gap:8px; flex-wrap:wrap; }
+    .avatar-color { width:30px; height:30px; border-radius:50%; border:2px solid var(--color-border); position:relative; }
+    .avatar-color.selected { outline:2px solid var(--color-primary); outline-offset:2px; }
+    .profile-error { color:var(--color-danger); font-size:13px; min-height:20px; }
+    body[data-auth-mode="checking"] .app-layout,
+    body[data-auth-mode="checking"] .mobile-nav,
+    body[data-auth-mode="checking"] .top-stats,
+    body[data-auth-mode="signed-out"] .app-layout,
+    body[data-auth-mode="signed-out"] .mobile-nav,
+    body[data-auth-mode="signed-out"] .top-stats { display:none; }
+    .auth-shell { width:min(480px,100%); margin:clamp(28px,8vh,80px) auto; padding:20px; }
+    .auth-panel { padding:clamp(22px,5vw,36px); background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-card); box-shadow:var(--shadow); }
+    .auth-brand-mark { display:flex; align-items:center; gap:10px; color:var(--color-primary); font-size:20px; margin-bottom:28px; }
+    .auth-panel h1 { font-size:28px; line-height:1.2; margin:4px 0 8px; }
+    .auth-subtitle, .auth-privacy-note, .auth-footer { color:var(--color-text-secondary); font-size:13px; }
+    .auth-panel form { margin-top:22px; }
+    .auth-primary { width:100%; margin-top:12px; }
+    .auth-error { color:var(--color-danger); font-size:13px; min-height:20px; margin-top:7px; }
+    .auth-import-choice { display:flex; gap:10px; margin:14px 0; padding:12px; background:var(--color-surface-subtle); border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer; }
+    .auth-import-choice input { flex:0 0 auto; width:18px; height:18px; accent-color:var(--color-primary); }
+    .auth-import-choice span { display:grid; gap:4px; }
+    .auth-import-choice small { color:var(--color-text-secondary); font-size:12px; line-height:1.4; }
+    .auth-privacy-note { margin-top:12px; }
+    .auth-footer { margin-top:22px; padding-top:16px; border-top:1px solid var(--color-border); text-align:center; }
+    .auth-local-link { color:var(--color-primary); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+    .auth-sent-note { padding:12px; background:var(--color-selected); border-radius:var(--radius-sm); overflow-wrap:anywhere; }
+    .auth-pin-input { font-size:26px; font-weight:800; letter-spacing:8px; text-align:center; font-variant-numeric:tabular-nums; }
+    .auth-code-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+    .auth-code-actions .btn { font-size:12px; padding:9px 8px; }
+    .wardrobe-icon { width:30px; height:30px; display:grid; place-items:center; color:var(--color-primary); }
+    .wardrobe-icon .ls-icon { width:22px; height:22px; }
+
+    /* TASKS & LISTS */
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .task-item:last-child {
+      border-bottom: none;
+    }
+
+    .task-checkbox {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    /* FORMS & INPUTS */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--color-text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-button);
+      color: var(--color-text);
+      font-size: 14px;
+      transition: border 0.18s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--color-primary);
+      background: var(--color-surface);
+    }
+
+    /* DUOLINGO STYLE PATH IN LEARN */
+    .track-card {
+      margin-bottom: 24px;
+      padding: 24px;
+    }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .path-nodes-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .node-wrapper {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      grid-template-rows: 1fr auto;
+      align-items: center;
+      column-gap: 10px;
+      padding: 10px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+    }
+
+    .node-wrapper.current { background: var(--color-selected); border-color: var(--color-primary); }
+    .node-wrapper.completed { background: var(--color-success-light); }
+    .node-wrapper.locked { background: var(--color-surface-subtle); }
+    .node-wrapper.boss-node { border-style: dashed; border-width: 2px; }
+
+    .path-btn {
+      grid-row: 1 / span 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      font-size: 17px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      box-shadow: none;
+      position: relative;
+      transition: transform 0.16s ease, filter 0.16s ease;
+    }
+
+    .path-btn:hover:not(:disabled) {
+      filter: brightness(1.1);
+      transform: translateY(-3px);
+    }
+
+    .path-btn.done {
+      background: var(--color-success);
+    }
+
+    .path-btn.boss {
+      background: var(--color-primary-hover);
+      font-size: 20px;
+    }
+
+    .path-btn:disabled {
+      background: var(--color-surface-subtle);
+      color: var(--color-text-secondary);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .node-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    .node-status { grid-column: 2; font-size: 11px; color: var(--color-text-secondary); }
+    .node-wrapper.current .node-status { color: var(--color-primary-hover); }
+    .node-wrapper.completed .node-status { color: var(--color-success); }
+
+    /* LESSON PLAYER SCREEN */
+    .lesson-player {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .lesson-heading { margin-bottom: 14px; }
+    .lesson-progress { display:flex; align-items:center; gap:8px; color:var(--color-text-secondary); font-size:12px; }
+    .attempt-meter { font-weight:750; color:var(--color-text); }
+    .lesson-question { font-size:20px; line-height:1.35; margin:20px 0 12px; }
+    .lesson-message { padding:14px 16px; border-radius:var(--radius-sm); margin:14px 0; }
+    .lesson-message.error { background:var(--color-danger-light); border-left:3px solid var(--color-danger); }
+    .lesson-message.success { background:var(--color-success-light); border-left:3px solid var(--color-success); }
+    .lesson-message.neutral { background:var(--color-surface-subtle); border-left:3px solid var(--color-primary); }
+
+    .theory-box {
+      background: var(--color-selected);
+      border-left: 4px solid var(--color-primary);
+      padding: 16px;
+      border-radius: 0 var(--radius-button) var(--radius-button) 0;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .example-box {
+      background: color-mix(in srgb, var(--color-mint-light) 50%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-primary) 25%, var(--color-border));
+      padding: 14px;
+      border-radius: var(--radius-button);
+      margin: 14px 0;
+      font-size: 13.5px;
+    }
+
+    /* CHOICE BUTTON STATES (SECTION 9) */
+    .choice-btn {
+      width: 100%;
+      text-align: left;
+      padding: 15px 18px;
+      margin: 10px 0;
+      background: var(--color-surface);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-button);
+      font-weight: 700;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: all 0.16s ease;
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      border-color: var(--color-primary);
+      background: var(--color-selected);
+      transform: translateY(-1px);
+    }
+
+    .choice-btn.selected-pending {
+      border-color: var(--color-primary);
+      background: var(--color-selected);
+    }
+
+    .choice-btn.correct {
+      border-color: var(--color-success) !important;
+      background: var(--color-success-light) !important;
+      color: var(--color-text) !important;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 20%, transparent);
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--color-danger) !important;
+      background: var(--color-danger-light) !important;
+      color: var(--color-text) !important;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-danger) 20%, transparent);
+    }
+
+    .choice-btn.correct-highlight {
+      border-color: var(--color-success) !important;
+      background: color-mix(in srgb, var(--color-success-light) 40%, var(--color-surface));
+    }
+
+    .choice-btn:disabled {
+      cursor: default;
+    }
+
+    .choice-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .choice-badge.badge-success {
+      background: var(--color-success);
+      color: var(--color-on-success);
+    }
+
+    .choice-badge.badge-danger {
+      background: var(--color-danger);
+      color: var(--color-on-danger);
+    }
+
+    .hint-drawer {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-button);
+      padding: 14px;
+      margin-top: 14px;
+      font-size: 13.5px;
+    }
+
+    /* EISENHOWER MATRIX */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .quadrant {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-button);
+      padding: 16px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quadrant-1 { border-top: 4px solid var(--color-danger); }
+    .quadrant-2 { border-top: 4px solid var(--color-primary); }
+    .quadrant-3 { border-top: 4px solid var(--color-gold); }
+    .quadrant-4 { border-top: 4px solid var(--color-text-secondary); }
+
+    .matrix-task-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    /* TOAST */
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-text);
+      color: var(--color-bg);
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      pointer-events: none;
+      animation: toastIn 0.25s ease;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translate(-50%, 15px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    /* TABS */
+    .tabs-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .tab-btn {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      font-weight: 800;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      background: var(--color-selected);
+      color: var(--color-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      border-color: var(--color-primary);
+    }
+
+    /* BADGES */
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 750;
+      margin: 4px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 26px;
+      max-width: 580px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .app-layout {
+        display: block;
+        padding: 16px 14px 105px;
+      }
+      .sidebar { display: none; }
+      .mobile-nav { display: flex; }
+      .col-12, .col-8, .col-7, .col-6, .col-5, .col-4 {
+        grid-column: span 12;
+      }
+      .matrix-grid {
+        grid-template-columns: 1fr;
+      }
+      .home-dashboard { grid-template-columns:1fr; }
+      .home-aside { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; }
+      .mission-card { grid-row:span 2; }
+      .quick-route-grid { grid-template-columns:1fr; }
+      .path-nodes-container { grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); }
+      .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .profile-editor-layout { grid-template-columns: 1fr; }
+      .profile-editor-preview { position: static; order: -1; }
+      .top-header { padding-left: 12px; padding-right: 12px; }
+      .top-stats { gap: 5px; }
+      .stat-pill { padding: 5px 8px; font-size: 12px; }
+      .brand { font-size: 18px; }
+      .brand-badge { display: none; }
+    }
+
+    @media (max-width: 460px) {
+      .auth-shell { margin:18px auto; padding:14px; }
+      .auth-panel { padding:22px 18px; }
+      .auth-panel h1 { font-size:24px; }
+      .auth-code-actions { grid-template-columns:1fr; }
+      .path-nodes-container { grid-template-columns: 1fr; }
+      .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .profile-skills { grid-template-columns: 1fr; }
+      .profile-hero { display:grid; grid-template-columns:72px 72px minmax(0,1fr); gap:10px; align-items:start; }
+      .profile-hero .profile-photo-large, .profile-hero > .avatar-wrapper { width:72px; height:72px; font-size:34px; }
+      .profile-hero .profile-identity h2 { font-size:18px; }
+      .profile-hero .profile-actions { display:grid; grid-column:1 / -1; grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .profile-hero .profile-actions .btn { width:100%; min-width:0; padding:8px; white-space:normal; }
+      .track-card { padding: 16px; }
+      .top-stats .streak-pill { display: none; }
+      .lesson-question { font-size: 18px; }
+      .choice-btn { padding: 12px; }
+      .home-welcome h1 { font-size:21px; }
+      .learning-continue-card { padding:16px; }
+      .learning-continue-card > .avatar-wrapper { width:68px; height:68px; font-size:34px; }
+      .continue-copy h2 { font-size:20px; }
+      .continue-footer { align-items:stretch; }
+      .continue-footer > .btn { width:100%; }
+      .home-aside { grid-template-columns:1fr; }
+      .mission-card { grid-row:auto; }
+      .world-grid { grid-template-columns:1fr; }
+      .world-summary h3 { min-height:0; }
+    }
+
+    @media (max-width: 350px) {
+      .theme-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="top-header">
+    <div class="brand" id="brand-logo" role="button" tabindex="0" aria-label="LifeSkill главная">
+      <span>LifeSkill</span>
+      <span class="brand-badge">Fresh Mint</span>
+    </div>
+
+    <div class="top-stats">
+      <div class="stat-pill streak-pill" title="Серия дней обучения"><svg class="ls-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-3-2-5-3 3-5 6-5 9a7 7 0 0 0 7 7Z"/><path d="M12 22a3 3 0 0 0 3-3c0-2-2-3-3-5-1 2-3 3-3 5a3 3 0 0 0 3 3Z"/></svg> <span id="top-streak">0</span></div>
+      <div class="stat-pill heart-pill" title="Сердечки / Энергия"><svg class="ls-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg> <span id="top-hearts">5</span></div>
+      <div class="stat-pill xp-pill" title="Опыт"><svg class="ls-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/></svg> <span id="top-xp">0</span></div>
+      <div class="stat-pill coin-pill" title="ЛайфКоины"><svg class="ls-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.1 10.5a6 6 0 0 1-8.6 7.7"/><path d="M8 5v6m-2-3h4m8 4v6m-2-3h4"/></svg> <span id="top-coins">30</span></div>
+      <button class="profile-photo profile-photo-small" id="header-profile-photo" type="button" aria-label="\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e?????? ???????"></button>
+      <button class="icon-btn" id="theme-toggle" aria-label="Переключить тему"><svg class="ls-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 22a10 10 0 1 1 10-10c0 1.7-1.3 3-3 3h-2a2 2 0 0 0-2 2 5 5 0 0 1-3 5Z"/></svg></button>
+    </div>
+  </header>
+
+  <!-- LAYOUT -->
+  <div class="app-layout">
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="sidebar" id="sidebar-nav" aria-label="Боковое меню">
+      <!-- Injected dynamically -->
+    </aside>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="content-area" id="main-content" role="main">
+      <!-- Views injected here -->
+    </main>
+  </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильное меню">
+    <!-- Injected dynamically -->
+  </nav>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast" class="toast-msg" style="display:none;" role="status" aria-live="polite"></div>
+
+  <!-- MODAL CONTAINER -->
+  <div id="modal-container" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true"></div>
+
+  <!-- CORE SCRIPTS -->
+  <script src="lifeskill-icons.js"></script>
+  <script src="lifeskill-core.js"></script>
+  <script src="lifeskill-data.js"></script>
+
+  <!-- APPLICATION LOGIC & UI GLUE -->
+  <script>
+  (function() {
+    'use strict';
+
+    var Core = window.LifeSkillCore;
+    var Data = window.LifeSkillData;
+
+    if (!Core || !Data) {
+      console.error('Critical modules missing');
+      return;
+    }
+
+    var NAV_PAGES = [
+      { id: 'home', icon: 'House', label: 'Главная' },
+      { id: 'learn', icon: 'GraduationCap', label: 'Обучение' },
+      { id: 'tools', icon: 'BriefcaseBusiness', label: 'Тулбокс' },
+      { id: 'character', icon: 'UserRound', label: 'Персонаж' },
+      { id: 'profile', icon: 'Settings', label: 'Профиль' }
+    ];
+    var WORLD_ICON_NAMES = ['Wallet', 'CalendarDays', 'PanelsTopLeft', 'ShoppingCart', 'BriefcaseBusiness', 'House'];
+
+    var THEME_CATALOG = [
+      { id: 'fresh-mint', name: 'Fresh Mint', desc: 'Свежая и собранная', bg: '#F4F9F6', surface: '#FFFFFF', primary: '#059669', text: '#1F2937' },
+      { id: 'light-classic', name: 'Light Classic', desc: 'Нейтральная классика', bg: '#F8FAFC', surface: '#FFFFFF', primary: '#2563EB', text: '#1E293B' },
+      { id: 'midnight', name: 'Midnight', desc: 'Спокойная тёмная тема', bg: '#111827', surface: '#1F2937', primary: '#34D399', text: '#F9FAFB' },
+      { id: 'ocean-blue', name: 'Ocean Blue', desc: 'Воздушная прохлада', bg: '#F0F9FF', surface: '#FFFFFF', primary: '#0284C7', text: '#0F172A' },
+      { id: 'lavender-dream', name: 'Lavender Dream', desc: 'Мягкий творческий акцент', bg: '#F7F5FF', surface: '#FFFFFF', primary: '#7C3AED', text: '#2E2447' },
+      { id: 'sunset', name: 'Sunset', desc: 'Тёплая и уютная', bg: '#FFF8F1', surface: '#FFFFFF', primary: '#EA580C', text: '#292524' }
+    ];
+    var AVATAR_COLORS = ['#D1FAE5', '#DBEAFE', '#E0F2FE', '#EDE9FE', '#FFEDD5', '#FCE7F3'];
+
+    var state = readState();
+    var currentToolTab = 'budget';
+    var toastTimer = null;
+    var authMode = location.protocol === 'file:' ? 'local' : 'checking';
+    var authPhase = 'email';
+    var authEmailDraft = '';
+    var authMaskedEmail = '';
+    var authImportDraft = false;
+    var authResendAt = 0;
+    var authTimer = null;
+    var authSaveTimer = null;
+    var authAccount = null;
+
+    var profilePhotoURL = '';
+    var profilePhotoDataURL = '';
+    function initials() {
+      return (String(state.name || '?').trim().split(/\s+/).slice(0, 2).map(function(part) { return part.charAt(0); }).join('') || '?').toUpperCase();
+    }
+    function renderProfilePhoto(sizeClass) {
+      var photoSource = profilePhotoURL || profilePhotoDataURL;
+      return '<span class="profile-photo ' + (sizeClass || '') + '" data-profile-photo>' + escapeHtml(initials()) + (photoSource ? '<img src="' + photoSource + '" alt="" onerror="this.remove()">' : '') + '</span>';
+    }
+    function openPhotoDatabase() {
+      return new Promise(function(resolve, reject) {
+        if (!window.indexedDB) { reject(new Error('?\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e????? ???\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e??????.')); return; }
+        var request = indexedDB.open('lifeskill-profile-media', 1);
+        request.onupgradeneeded = function() { request.result.createObjectStore('photos'); };
+        request.onsuccess = function() { resolve(request.result); };
+        request.onerror = function() { reject(request.error || new Error('?? ??????? ??????? ?\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e?????.')); };
+      });
+    }
+    function loadProfilePhoto() {
+      return openPhotoDatabase().then(function(db) {
+        return new Promise(function(resolve, reject) {
+          var request = db.transaction('photos', 'readonly').objectStore('photos').get('profile');
+          request.onsuccess = function() { if (request.result instanceof Blob) profilePhotoURL = URL.createObjectURL(request.result); db.close(); resolve(); };
+          request.onerror = function() { db.close(); reject(request.error); };
+        });
+      }).catch(function() {}).then(function() { renderApp(); });
+    }
+    function writeProfilePhoto(blob) {
+      if (authMode === 'signed-in') {
+        if (!blob) {
+          return authRequest('/api/account/photo', 'DELETE').then(function() { profilePhotoDataURL = ''; });
+        }
+        return new Promise(function(resolve, reject) {
+          var reader = new FileReader();
+          reader.onerror = function() { reject(new Error('Не удалось прочитать фото.')); };
+          reader.onload = function() {
+            authRequest('/api/account/photo', 'PUT', { dataUrl: reader.result }).then(function() {
+              profilePhotoDataURL = reader.result;
+              resolve();
+            }).catch(reject);
+          };
+          reader.readAsDataURL(blob);
+        });
+      }
+      return openPhotoDatabase().then(function(db) {
+        return new Promise(function(resolve, reject) {
+          var tx = db.transaction('photos', 'readwrite');
+          if (blob) tx.objectStore('photos').put(blob, 'profile'); else tx.objectStore('photos').delete('profile');
+          tx.oncomplete = function() { db.close(); resolve(); };
+          tx.onerror = tx.onabort = function() { db.close(); reject(tx.error || new Error('?? ??????? ?\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e??????.')); };
+        });
+      });
+    }
+
+
+    function readState() {
+      var primary = localStorage.getItem(Core.STORAGE_KEY);
+      var backup = localStorage.getItem(Core.BACKUP_KEY);
+      for (var i = 0; i < 2; i++) {
+        var str = i === 0 ? primary : backup;
+        if (str) {
+          try {
+            var parsed = JSON.parse(str);
+            if (Core.validateSaveState(parsed)) {
+              return Core.migrateSaveState(parsed);
+            }
+          } catch (e) {}
+        }
+      }
+      return Core.getInitialState();
+    }
+
+    function saveState() {
+      if (authMode === 'signed-in') {
+        scheduleAccountSave();
+        return;
+      }
+      try {
+        var old = localStorage.getItem(Core.STORAGE_KEY);
+        if (old) {
+          try {
+            var parsedOld = JSON.parse(old);
+            if (Core.validateSaveState(parsedOld)) {
+              localStorage.setItem(Core.BACKUP_KEY, old);
+            }
+          } catch(e) {}
+        }
+        localStorage.setItem(Core.STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        showToast('Не удалось сохранить в локальное хранилище браузера');
+      }
+    }
+
+    function accountProfilePayload() {
+      return {
+        name: state.name,
+        profileDescription: state.profileDescription || '',
+        profileCardStyle: state.profileCardStyle || 'standard',
+        avatar: state.avatar,
+        equippedItems: state.equippedItems,
+        theme: state.theme,
+        reducedMotion: state.reducedMotion === true,
+        soundEnabled: state.soundEnabled !== false,
+        noPressure: state.noPressure === true
+      };
+    }
+
+    function accountGamePayload() {
+      var game = Object.assign({}, state);
+      ['name', 'profileDescription', 'profileCardStyle', 'avatar', 'equippedItems', 'theme', 'reducedMotion', 'soundEnabled', 'noPressure'].forEach(function(key) { delete game[key]; });
+      return game;
+    }
+
+    function scheduleAccountSave() {
+      clearTimeout(authSaveTimer);
+      authSaveTimer = setTimeout(function() {
+        fetch('/api/account/state', {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ profile: accountProfilePayload(), gameState: accountGamePayload() })
+        }).then(function(response) {
+          if (response.status === 401) throw new Error('Сессия истекла. Войди снова.');
+          if (!response.ok) return response.json().then(function(body) { throw new Error(body.error || 'Не удалось сохранить аккаунт.'); });
+        }).catch(function(error) {
+          showToast(error.message || 'Не удалось синхронизировать аккаунт.');
+        });
+      }, 350);
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() {
+        toast.style.display = 'none';
+      }, 2800);
+    }
+
+    function applyTheme() {
+      var normalizedTheme = Core.normalizeTheme(state.theme);
+      if (state.theme !== normalizedTheme) state.theme = normalizedTheme;
+      document.documentElement.setAttribute('data-theme', normalizedTheme);
+      document.documentElement.setAttribute('data-motion', state.reducedMotion ? 'reduced' : 'standard');
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.setAttribute('content', getThemeById(normalizedTheme).bg);
+      var toggleBtn = document.getElementById('theme-toggle');
+      if (toggleBtn) {
+        var themeIndex = THEME_CATALOG.findIndex(function(theme) { return theme.id === normalizedTheme; });
+        var nextTheme = THEME_CATALOG[(themeIndex + 1) % THEME_CATALOG.length];
+        toggleBtn.title = 'Тема: ' + getThemeById(normalizedTheme).name + '. Следующая: ' + nextTheme.name;
+      }
+      syncThemeCards();
+    }
+
+    function getThemeById(themeId) {
+      return THEME_CATALOG.find(function(theme) { return theme.id === themeId; }) || THEME_CATALOG[0];
+    }
+
+    function syncThemeCards() {
+      document.querySelectorAll('[data-theme-choice]').forEach(function(button) {
+        var isSelected = button.getAttribute('data-theme-choice') === state.theme;
+        button.classList.toggle('selected', isSelected);
+        button.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        var status = button.querySelector('.theme-choice-status');
+        if (status) status.textContent = isSelected ? '✓ Выбрана' : 'Выбрать';
+      });
+    }
+
+    function setTheme(themeId) {
+      state.theme = Core.normalizeTheme(themeId);
+      saveState();
+      applyTheme();
+    }
+
+    function playSound(type) {
+      if (!state.soundEnabled) return;
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        var now = ctx.currentTime;
+        if (type === 'success') {
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+          osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'error') {
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.setValueAtTime(220, now + 0.1);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        }
+      } catch (e) {}
+    }
+
+    function updateTopStats() {
+      [
+        { id: 'top-streak', icon: 'Flame', value: state.streak },
+        { id: 'top-hearts', icon: 'Heart', value: state.hearts },
+        { id: 'top-xp', icon: 'Star', value: state.xp },
+        { id: 'top-coins', icon: 'Coins', value: state.coins }
+      ].forEach(function(stat) {
+        var value = document.getElementById(stat.id);
+        if (value) value.parentElement.innerHTML = iconSvg(stat.icon, 16) + ' <span id="' + stat.id + '">' + stat.value + '</span>';
+      });
+    }
+
+    function localProgressSummary() {
+      var local = readState();
+      return {
+        state: local,
+        hasProgress: local.xp > 0 || Object.keys(local.passedLessons || {}).some(function(id) { return local.passedLessons[id]; }) || Object.keys(local.achievements || {}).some(function(id) { return local.achievements[id]; }),
+        lessons: Object.keys(local.passedLessons || {}).filter(function(id) { return local.passedLessons[id]; }).length
+      };
+    }
+
+    function renderAuthView() {
+      var local = localProgressSummary();
+      var codePhase = authPhase === 'code';
+      var codeForm = codePhase
+        ? '<p class="auth-sent-note">Мы отправили код подтверждения на вашу почту <b>' + escapeHtml(authMaskedEmail || '') + '</b>.</p><form id="auth-code-form"><label class="form-label" for="auth-pin">Шестизначный код</label><input id="auth-pin" class="input-field auth-pin-input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" minlength="6" placeholder="000000" required aria-label="Шестизначный код подтверждения"><div id="auth-error" class="auth-error" role="alert">' + escapeHtml(authError) + '</div><button class="btn auth-primary" type="submit" id="auth-verify-btn">Подтвердить</button><div class="auth-code-actions"><button type="button" class="btn btn-alt" id="auth-change-email">' + iconSvg('ArrowLeft', 16) + ' Изменить адрес</button><button type="button" class="btn btn-alt" id="auth-resend-code" disabled>' + iconSvg('RefreshCw', 16) + ' Отправить код повторно <span id="auth-resend-timer">60</span> с</button></div></form>'
+        : '<form id="auth-email-form"><label class="form-label" for="auth-email">Электронная почта</label><input id="auth-email" class="input-field" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="name@example.com" value="' + escapeHtml(authEmailDraft) + '" required><div id="auth-error" class="auth-error" role="alert">' + escapeHtml(authError) + '</div>' +
+          (local.hasProgress ? '<label class="auth-import-choice"><input id="auth-import-local" type="checkbox" ' + (authImportDraft ? 'checked' : '') + '><span><b>Импортировать локальный прогресс при создании нового аккаунта</b><small>' + local.lessons + ' уроков · ' + local.state.xp + ' XP · ' + local.state.coins + ' ЛайфКоинов. Данные существующего аккаунта не объединяются.</small></span></label>' : '') +
+          '<button class="btn auth-primary" type="submit" id="auth-send-code">Продолжить ' + iconSvg('ChevronRight', 18) + '</button><p class="auth-privacy-note">Для подтверждения адреса будет отправлен одноразовый код. Код действует 10 минут.</p></form>';
+      return '<section class="auth-shell"><div class="auth-panel"><div class="auth-brand-mark">' + iconSvg('GraduationCap', 26) + '<b>LifeSkill</b></div><div class="kicker">Твой личный путь</div><h1>' + (codePhase ? 'Проверь почту' : 'Добро пожаловать') + '</h1><p class="auth-subtitle">Твой путь к уверенной взрослой жизни</p>' + codeForm +
+        '<div class="auth-footer">' + (location.protocol === 'file:' ? '<p>Вход по почте доступен при запуске серверной версии LifeSkill.</p>' : '<button type="button" id="auth-local-mode" class="auth-local-link">Продолжить в локальном режиме</button>') + '</div></div></section>';
+    }
+
+    async function authRequest(path, method, body) {
+      var response = await fetch(path, {
+        method: method,
+        credentials: 'same-origin',
+        headers: body ? { 'Content-Type': 'application/json' } : {},
+        body: body ? JSON.stringify(body) : undefined
+      });
+      var result;
+      try { result = await response.json(); } catch (error) { result = {}; }
+      if (!response.ok) throw new Error(result.error || 'Запрос не выполнен. Попробуй ещё раз.');
+      return result;
+    }
+
+    function adoptServerAccount(account) {
+      authAccount = { id: account.id, email: account.email };
+      profilePhotoDataURL = account.photoData || '';
+      if (profilePhotoURL) URL.revokeObjectURL(profilePhotoURL);
+      profilePhotoURL = '';
+      state = Core.migrateSaveState(Object.assign({}, account.gameState || {}, account.profile || {}));
+      authMode = 'signed-in';
+      authPhase = 'email';
+      authError = '';
+      saveState();
+    }
+
+    function enterLocalMode() {
+      authAccount = null;
+      profilePhotoDataURL = '';
+      authMode = 'local';
+      state = readState();
+      renderApp();
+      loadProfilePhoto();
+    }
+
+    function leaveServerAccount() {
+      if (authTimer) clearInterval(authTimer);
+      authTimer = null;
+      authAccount = null;
+      profilePhotoDataURL = '';
+      if (profilePhotoURL) URL.revokeObjectURL(profilePhotoURL);
+      profilePhotoURL = '';
+      state = Core.getInitialState();
+      authPhase = 'email';
+      authEmailDraft = '';
+      authError = '';
+      authMode = 'signed-out';
+      renderApp();
+    }
+
+    function initializeAuth() {
+      if (location.protocol === 'file:') {
+        authMode = 'local';
+        renderApp();
+        loadProfilePhoto();
+        return;
+      }
+      authMode = 'checking';
+      renderApp();
+      authRequest('/api/session', 'GET').then(function(result) {
+        if (result.authenticated && result.account) {
+          adoptServerAccount(result.account);
+        } else {
+          authMode = 'signed-out';
+        }
+        renderApp();
+      }).catch(function() {
+        authMode = 'local';
+        state = readState();
+        renderApp();
+        loadProfilePhoto();
+      });
+    }
+
+    function refreshAuthCountdown() {
+      var button = document.getElementById('auth-resend-code');
+      var label = document.getElementById('auth-resend-timer');
+      if (!button || !label) return;
+      var seconds = Math.max(0, Math.ceil((authResendAt - Date.now()) / 1000));
+      label.textContent = seconds;
+      button.disabled = seconds > 0;
+      button.innerHTML = iconSvg('RefreshCw', 16) + (seconds ? ' Отправить код повторно <span id="auth-resend-timer">' + seconds + '</span> с' : ' Отправить код повторно');
+      if (!seconds && authTimer) {
+        clearInterval(authTimer);
+        authTimer = null;
+      }
+    }
+
+    function attachAuthHandlers() {
+      var emailForm = document.getElementById('auth-email-form');
+      if (emailForm) emailForm.onsubmit = function(event) {
+        event.preventDefault();
+        var emailField = document.getElementById('auth-email');
+        authEmailDraft = emailField.value.trim();
+        authImportDraft = !!(document.getElementById('auth-import-local') && document.getElementById('auth-import-local').checked);
+        var sendButton = document.getElementById('auth-send-code');
+        sendButton.disabled = true;
+        authError = '';
+        authRequest('/api/auth/request-code', 'POST', { email: authEmailDraft }).then(function(result) {
+          authMaskedEmail = result.maskedEmail;
+          authPhase = 'code';
+          authResendAt = Date.now() + (result.resendAfter || 60) * 1000;
+          authError = '';
+          renderApp();
+          var pin = document.getElementById('auth-pin');
+          if (pin) pin.focus();
+          authTimer = setInterval(refreshAuthCountdown, 250);
+        }).catch(function(error) {
+          authError = error.message;
+          sendButton.disabled = false;
+          document.getElementById('auth-error').textContent = authError;
+        });
+      };
+
+      var codeField = document.getElementById('auth-pin');
+      var codeForm = document.getElementById('auth-code-form');
+      if (codeField && codeForm) {
+        codeField.oninput = function() { codeField.value = codeField.value.replace(/\D/g, '').slice(0, 6); };
+        codeForm.onsubmit = function(event) {
+          event.preventDefault();
+          var code = codeField.value;
+          if (!/^\d{6}$/.test(code)) {
+            document.getElementById('auth-error').textContent = 'Введи все шесть цифр кода.';
+            return;
+          }
+          var verifyButton = document.getElementById('auth-verify-btn');
+          verifyButton.disabled = true;
+          var local = localProgressSummary();
+          var request = { email: authEmailDraft, code: code };
+          if (authImportDraft && local.hasProgress) {
+            request.importLocalProgress = true;
+            request.legacyState = local.state;
+          }
+          authRequest('/api/auth/verify-code', 'POST', request).then(function(result) {
+            if (authTimer) clearInterval(authTimer);
+            authTimer = null;
+            adoptServerAccount(result.account);
+            renderApp();
+            if (result.created) showToast(result.imported ? 'Аккаунт создан. Локальный прогресс импортирован.' : 'Аккаунт LifeSkill создан.');
+          }).catch(function(error) {
+            document.getElementById('auth-error').textContent = error.message;
+            verifyButton.disabled = false;
+          });
+        };
+      }
+
+      var changeEmail = document.getElementById('auth-change-email');
+      if (changeEmail) changeEmail.onclick = function() {
+        if (authTimer) clearInterval(authTimer);
+        authTimer = null;
+        authPhase = 'email';
+        authError = '';
+        renderApp();
+      };
+      var resend = document.getElementById('auth-resend-code');
+      if (resend) {
+        refreshAuthCountdown();
+        resend.onclick = function() {
+          if (Date.now() < authResendAt) return;
+          resend.disabled = true;
+          authRequest('/api/auth/request-code', 'POST', { email: authEmailDraft }).then(function(result) {
+            authMaskedEmail = result.maskedEmail;
+            authResendAt = Date.now() + (result.resendAfter || 60) * 1000;
+            authError = '';
+            renderApp();
+            authTimer = setInterval(refreshAuthCountdown, 250);
+          }).catch(function(error) {
+            resend.disabled = false;
+            document.getElementById('auth-error').textContent = error.message;
+          });
+        };
+      }
+      var localButton = document.getElementById('auth-local-mode');
+      if (localButton) localButton.onclick = enterLocalMode;
+    }
+
+    function renderNav() {
+      var html = NAV_PAGES.map(function(p) {
+        var active = state.page === p.id ? 'active' : '';
+        return '<button class="nav-btn ' + active + '" data-nav="' + p.id + '">' +
+          iconSvg(p.icon, 20) + ' ' + p.label +
+        '</button>';
+      }).join('');
+
+      var sidebar = document.getElementById('sidebar-nav');
+      if (sidebar) sidebar.innerHTML = html;
+      var mobileNav = document.getElementById('mobile-nav');
+      if (mobileNav) mobileNav.innerHTML = html;
+    }
+
+    function navigateTo(pageId) {
+      if (!NAV_PAGES.some(function(p) { return p.id === pageId; })) return;
+      state.page = pageId;
+      saveState();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
+
+    function iconSvg(name, size, label) {
+      return window.LifeSkillIcons.svg(name, size || 18, label || '', 'ls-icon');
+    }
+
+    function worldIcon(worldId, size) {
+      return iconSvg(WORLD_ICON_NAMES[worldId] || 'BookOpen', size || 22);
+    }
+
+    function wardrobeIcon(item) {
+      var names = { suit_interview: 'BriefcaseBusiness', cardigan_focus: 'Shirt', glasses_vision: 'Glasses', thermo_cup: 'CupSoda', cat_barsik: 'Cat', robot_vacuum: 'Bot', plant_monstera: 'Leaf', crown_maturity: 'Trophy' };
+      return iconSvg(names[item.id] || 'BadgeCheck', 20, item.name);
+    }
+
+    // Daily missions updater
+    function checkDailyMissions() {
+      var today = new Date().toLocaleDateString('sv-SE');
+      state.dailyMissions = state.dailyMissions || {};
+      if (state.dailyMissions.date !== today) {
+        state.dailyMissions = {
+          date: today,
+          lessonDone: false,
+          toolUsed: false,
+          weekDone: false,
+          claimed: false
+        };
+      }
+      return state.dailyMissions;
+    }
+
+    function claimDailyBonus() {
+      var dm = checkDailyMissions();
+      var doneCount = (dm.lessonDone ? 1 : 0) + (dm.toolUsed ? 1 : 0) + (dm.weekDone ? 1 : 0);
+      if (doneCount >= 2 && !dm.claimed) {
+        dm.claimed = true;
+        state.xp += 20;
+        state.coins += 15;
+        saveState();
+        playSound('success');
+        showToast('🎁 Ежедневная награда забрана: +20 XP и +15 ЛайфКоинов!');
+        renderApp();
+      }
+    }
+
+    function getNextHomeLesson() {
+      var activeRuns = Object.keys(state.activeLessonRuns || {}).map(function(lessonId) {
+        var runId = state.activeLessonRuns[lessonId];
+        return state.lessonRuns && state.lessonRuns[runId];
+      }).filter(function(run) {
+        return run && !state.passedLessons[run.lessonId] && run.status !== 'completed';
+      }).sort(function(a, b) {
+        return String(b.createdAt || '').localeCompare(String(a.createdAt || ''));
+      });
+      var activeRun = activeRuns[0] || null;
+      var lesson = activeRun
+        ? Data.LESSONS.find(function(item) { return item.id === activeRun.lessonId; })
+        : Data.LESSONS.find(function(item) { return !state.passedLessons[item.id]; });
+      return lesson ? { lesson: lesson, run: activeRun } : null;
+    }
+
+    // ==========================================
+    // VIEW: HOME
+    // ==========================================
+    function renderHomeView() {
+      var totalScore = Core.calculateTotalSkillScore(state.stats);
+      var currentRank = Core.getRankByScore(totalScore);
+      var passedCount = Object.keys(state.passedLessons).filter(function(k) { return state.passedLessons[k]; }).length;
+      var nextInfo = getNextHomeLesson();
+      var nextLesson = nextInfo && nextInfo.lesson;
+      var worldLessons = nextLesson ? Data.LESSONS.filter(function(item) { return item.w === nextLesson.w; }) : [];
+      var worldPassed = worldLessons.filter(function(item) { return state.passedLessons[item.id]; }).length;
+      var lessonNumber = nextLesson ? Math.min(worldLessons.length, worldPassed + 1) : Data.LESSONS.length;
+      var worldProgress = worldLessons.length ? Math.round((worldPassed / worldLessons.length) * 100) : 100;
+      var rankIndex = Core.RANKS.findIndex(function(rank) { return rank.name === currentRank.name; });
+      var nextRank = Core.RANKS[rankIndex + 1] || null;
+      var rankProgress = nextRank ? Math.max(0, Math.min(100, Math.round(((totalScore - currentRank.min) / (nextRank.min - currentRank.min)) * 100))) : 100;
+      var daily = checkDailyMissions();
+      var dailyDone = (daily.lessonDone ? 1 : 0) + (daily.toolUsed ? 1 : 0) + (daily.weekDone ? 1 : 0);
+      var weekDone = Object.keys((state.firstWeek && state.firstWeek.completedDays) || {}).filter(function(day) { return state.firstWeek.completedDays[day]; }).length;
+      var skills = [
+        { key: 'discipline', icon: 'ShieldCheck', name: 'Дисциплина' },
+        { key: 'independence', icon: 'Compass', name: 'Самостоятельность' },
+        { key: 'planning', icon: 'CalendarClock', name: 'Планирование' },
+        { key: 'organization', icon: 'Folders', name: 'Организованность' }
+      ];
+      var missions = [
+        { done: daily.lessonDone, title: 'Пройти урок без ошибок', detail: 'Правильный ответ с первой попытки', action: 'learn' },
+        { done: daily.toolUsed, title: 'Использовать инструмент', detail: 'Завершить расчёт или действие в Тулбоксе', action: 'tools' },
+        { done: daily.weekDone, title: 'Выполнить шаг недели', detail: 'Завершить один день маршрута', action: 'week' }
+      ];
+
+      return '' +
+        '<div class="page-title home-welcome">' + renderProfilePhoto('') + '<div>' +
+          '<div class="kicker">' + iconSvg('Trophy', 18) + ' ' + escapeHtml(currentRank.name) + '</div>' +
+          '<h1>Продолжим, ' + escapeHtml(state.name) + '?</h1>' +
+          '<p>Следующий небольшой шаг к самостоятельности</p>' +
+          '</div></div>' +
+        '<div class="home-dashboard">' +
+          '<div class="home-primary">' +
+            '<section class="card learning-continue-card">' +
+              '<div class="continue-copy"><div class="kicker">' + (nextLesson ? escapeHtml(Data.WORLDS[nextLesson.w].title) : 'Путь пройден') + '</div>' +
+                '<h2>' + (nextLesson ? escapeHtml(nextLesson.t) : 'Все направления завершены!') + '</h2>' +
+                '<p>' + (nextLesson ? (nextInfo.run ? 'Урок сохранён. Продолжай с той же попытки.' : 'Готов короткий урок с практическим примером.') : 'Можно повторить темы или изучить инструменты LifeSkill.') + '</p>' +
+                (nextLesson ? '<div class="continue-progress-label"><span>Урок ' + lessonNumber + ' из ' + worldLessons.length + '</span><span>' + worldPassed + ' завершено в направлении</span></div><div class="progress-track"><div class="progress-fill" style="width:' + worldProgress + '%;"></div></div>' : '<div class="continue-progress-label"><span>' + passedCount + ' из ' + Data.LESSONS.length + ' уроков завершено</span></div><div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>') +
+                '<div class="continue-footer"><div class="continue-level"><span class="level-mark">' + Core.getLevelByXP(state.xp) + '</span><span><b>Уровень персонажа</b><small>' + state.xp + ' XP всего</small></span></div><button class="btn" id="btn-continue-lesson">' + (nextLesson ? (nextInfo.run ? 'Продолжить урок' : passedCount ? 'Продолжить обучение' : 'Начать обучение') : 'Открыть обучение') + ' →</button></div>' +
+              '</div>' + renderAvatarMarkup(state.avatar, state.equippedItems, state.profileCardStyle) +
+            '</section>' +
+            '<section class="home-section"><div class="home-section-heading"><div><div class="kicker">Шесть направлений</div><h2>Твой путь обучения</h2></div><span class="badge-pill">' + passedCount + ' / ' + Data.LESSONS.length + '</span></div>' +
+              '<div class="world-grid">' + Data.WORLDS.map(function(world) {
+                var lessons = Data.LESSONS.filter(function(item) { return item.w === world.id; });
+                var done = lessons.filter(function(item) { return state.passedLessons[item.id]; }).length;
+                var activeRun = Object.keys(state.activeLessonRuns || {}).some(function(lessonId) {
+                  var id = state.activeLessonRuns[lessonId];
+                  var run = state.lessonRuns && state.lessonRuns[id];
+                  return run && run.lessonId && lessons.some(function(item) { return item.id === run.lessonId; }) && !state.passedLessons[run.lessonId] && run.status !== 'completed';
+                });
+                var status = done === lessons.length ? 'Завершено' : activeRun || done ? 'Продолжается' : 'Доступно';
+                var percent = Math.round(done / lessons.length * 100);
+                return '<article class="world-summary"><div class="world-summary-top"><span class="world-icon">' + worldIcon(world.id, 22) + '</span><span class="world-status ' + (done === lessons.length ? 'is-complete' : activeRun || done ? 'is-active' : '') + '">' + status + '</span></div><h3>' + escapeHtml(world.title) + '</h3><div class="world-summary-progress"><span>' + done + ' / ' + lessons.length + ' уроков</span><span>' + percent + '%</span></div><div class="progress-track"><div class="progress-fill" style="width:' + percent + '%"></div></div><button class="btn btn-sm btn-alt" data-open-world="' + world.id + '">' + (done || activeRun ? 'Продолжить' : 'Открыть') + ' ' + iconSvg('ChevronRight', 15) + '</button></article>';
+              }).join('') + '</div>' +
+            '</section>' +
+          '</div>' +
+          '<aside class="home-aside">' +
+            '<section class="card mission-card"><div class="home-section-heading"><div><div class="kicker">Сегодня</div><h2>Миссии дня</h2></div><span class="mission-count">' + dailyDone + '/3</span></div>' +
+              '<p class="mission-intro">Выполни любые две миссии и забери общую награду.</p>' +
+              missions.map(function(mission, index) {
+                return '<div class="mission-row ' + (mission.done ? 'mission-done' : '') + '"><span class="mission-check" aria-label="' + (mission.done ? 'Выполнено' : 'Не выполнено') + '">' + (mission.done ? iconSvg('CircleCheck', 18, 'Выполнено') : String(index + 1)) + '</span><div class="mission-copy"><b>' + mission.title + '</b><small>' + mission.detail + '</small><span class="mission-progress-text">' + (mission.done ? '1 / 1 выполнено' : '0 / 1 выполнено') + '</span></div></div>';
+              }).join('') +
+              '<div class="mission-reward">Награда за 2 миссии: <b>+20 XP · +15 ЛайфКоинов</b></div>' +
+              (daily.claimed ? '<div class="mission-claimed" role="status">✓ Дневная цель достигнута. Награда получена</div><button class="btn btn-alt" id="btn-next-step">' + (nextLesson ? 'Следующий урок' : 'Открыть карту') + ' →</button>' : '<button class="btn" id="btn-claim-daily" ' + (dailyDone < 2 ? 'disabled' : '') + '>Забрать награду дня</button>') +
+            '</section>' +
+            '<section class="card rank-card"><div class="kicker">Твой ранг</div><h2>' + iconSvg('Trophy', 20) + ' ' + escapeHtml(currentRank.name) + '</h2><div class="rank-progress-label"><span>' + totalScore + ' очков навыков</span><span>' + (nextRank ? 'До следующего: ' + (nextRank.min - totalScore) : 'Максимальный ранг') + '</span></div><div class="progress-track"><div class="progress-fill" style="width:' + rankProgress + '%"></div></div><div class="rank-meta"><span>' + iconSvg('Star', 14) + ' ' + state.xp + ' XP</span><span>' + iconSvg('Flame', 14) + ' ' + state.streak + ' дней</span><span>' + iconSvg('Trophy', 14) + ' ' + Object.keys(state.achievements || {}).filter(function(id) { return state.achievements[id]; }).length + ' достиж.</span></div><details class="skills-details"><summary>Мои навыки</summary><div class="skills-list">' + skills.map(function(skill) { return '<div><span>' + iconSvg(skill.icon, 16) + ' ' + skill.name + '</span><b>' + (state.stats[skill.key] || 0) + '</b></div>'; }).join('') + '</div></details></section>' +
+            '<section class="quick-route-grid"><button class="quick-route" id="btn-open-first-week"><span>' + iconSvg('CalendarDays', 22) + '</span><b>Моя первая неделя</b><small>' + weekDone + ' / 7 шагов</small><div class="progress-track"><div class="progress-fill" style="width:' + Math.round(weekDone / 7 * 100) + '%"></div></div><span class="quick-route-action">Открыть маршрут ' + iconSvg('ChevronRight', 14) + '</span></button><button class="quick-route" id="btn-open-month-sim"><span>' + iconSvg('CalendarClock', 22) + '</span><b>Симулятор месяца</b><small>День ' + Math.min((state.monthSimulation && state.monthSimulation.day) || 1, 30) + ' / 30 · бюджет и решения</small><span class="quick-route-action">Продолжить симуляцию ' + iconSvg('ChevronRight', 14) + '</span></button></section>' +
+          '</aside>' +
+        '</div>';
+    }
+
+    function getCompanionIcon(compId) {
+      if (compId === 'cat_barsik') return '🐱';
+      if (compId === 'robot_vacuum') return '🤖';
+      if (compId === 'plant_monstera') return '🪴';
+      return '✨';
+    }
+
+    function getOwnedItem(type, itemId, ownedItems) {
+      if (!itemId || itemId === 'none' || (type === 'clothes' && itemId === 'casual')) return null;
+      if ((ownedItems || []).indexOf(itemId) === -1) return null;
+      return Data.WARDROBE_ITEMS.find(function(item) { return item.id === itemId && item.type === type; }) || null;
+    }
+
+    function renderAvatarMarkup(avatar, equippedItems, profileCardStyle) {
+      var avatarData = avatar || state.avatar;
+      var equipped = equippedItems || state.equippedItems;
+      var owned = state.ownedItems || [];
+      var color = /^#[0-9A-Fa-f]{6}$/.test(avatarData.color || '') ? avatarData.color : '#D1FAE5';
+      var accessory = getOwnedItem('accessory', equipped.accessory, owned);
+      var clothes = getOwnedItem('clothes', equipped.clothes, owned);
+      var companion = getOwnedItem('companion', equipped.companion, owned);
+      return '<div class="avatar-wrapper ' + (profileCardStyle ? 'profile-avatar-' + profileCardStyle : '') + '" style="--avatar-tint:' + color + '">' +
+        '<span class="avatar-base">' + escapeHtml(avatarData.base || '🧑') + '</span>' +
+        (clothes ? '<span class="avatar-item avatar-clothes" title="' + escapeHtml(clothes.name) + '">' + clothes.icon + '</span>' : '') +
+        (accessory ? '<span class="avatar-item avatar-accessory" title="' + escapeHtml(accessory.name) + '">' + accessory.icon + '</span>' : '') +
+        (companion ? '<span class="avatar-companion" title="' + escapeHtml(companion.name) + '">' + companion.icon + '</span>' : '') +
+        '</div>';
+    }
+
+    function renderOwnedItemOptions(type, selectedId) {
+      var choices = Data.WARDROBE_ITEMS.filter(function(item) {
+        return item.type === type && (state.ownedItems || []).indexOf(item.id) !== -1;
+      });
+      var options = type === 'clothes'
+        ? [{ id: 'casual', name: 'Повседневный образ' }]
+        : [{ id: 'none', name: 'Нет' }];
+      options = options.concat(choices.map(function(item) { return { id: item.id, name: item.name }; }));
+      return options.map(function(item) {
+        return '<option value="' + item.id + '" ' + (selectedId === item.id ? 'selected' : '') + '>' + escapeHtml(item.name) + '</option>';
+      }).join('');
+    }
+
+    // ==========================================
+    // VIEW: LEARN
+    // ==========================================
+    function renderLearnView() {
+      var mistakesCount = Object.keys(state.reviewMistakes || {}).length;
+
+      return '' +
+        '<div class="page-title">' +
+          '<h1>Карта приключений взрослой жизни</h1>' +
+          '<p>Последовательные уровни и босс-испытания. Учись на реалистичных ситуациях!</p>' +
+        '</div>' +
+        (mistakesCount > 0
+          ? '<div class="card col-12" style="background:var(--color-gold-light); border:1px solid var(--color-gold); margin-bottom:20px;">' +
+              '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">' +
+                '<div>' +
+                  '<b>Режим повторения сложных тем</b>' +
+                  '<div style="font-size:13px; color:var(--color-text-secondary);">' + mistakesCount + ' ситуаций требуют закрепления без потери сердечек.</div>' +
+                '</div>' +
+                '<button class="btn btn-sm btn-alt" id="btn-review-mistakes">Отработать ошибки (' + mistakesCount + ')</button>' +
+              '</div>' +
+            '</div>'
+          : '') +
+        Data.WORLDS.map(function(world) {
+          var wLessons = Data.LESSONS.filter(function(l) { return l.w === world.id; });
+          var completedCount = wLessons.filter(function(l) { return state.passedLessons[l.id]; }).length;
+
+          return '' +
+            '<div class="card track-card" id="world-card-' + world.id + '">' +
+              '<div class="track-header">' +
+                '<div>' +
+                  '<div class="kicker">Направление ' + (world.id + 1) + '</div>' +
+                  '<h2>' + worldIcon(world.id, 22) + ' ' + world.title + '</h2>' +
+                  '<p style="font-size:13.5px; color:var(--color-text-secondary);">' + world.desc + '</p>' +
+                '</div>' +
+                '<span class="badge-pill">' + completedCount + '/' + wLessons.length + '</span>' +
+              '</div>' +
+              '<div class="path-nodes-container">' +
+                wLessons.map(function(lesson, idx) {
+                  var isPassed = !!state.passedLessons[lesson.id];
+                  var isLocked = idx > 0 && !state.passedLessons[wLessons[idx - 1].id];
+                  var isBoss = lesson.id.indexOf('boss') !== -1;
+                  var isCurrent = !isPassed && !isLocked;
+                  var wrapperClasses = 'node-wrapper ' + (isPassed ? 'completed ' : isLocked ? 'locked ' : 'current ') + (isBoss ? 'boss-node' : '');
+                  var btnClasses = 'path-btn ' + (isPassed ? 'done ' : '') + (isBoss ? 'boss ' : '');
+                  var icon = isLocked ? iconSvg('LockKeyhole', 18) : isPassed ? iconSvg('CircleCheck', 20, 'Урок завершён') : isBoss ? iconSvg('Zap', 20) : (idx + 1);
+                  var nodeStatus = isPassed ? 'Завершён' : isLocked ? 'Сначала: ' + escapeHtml(wLessons[idx - 1].t) : isBoss ? 'Босс-испытание · доступно' : 'Доступно';
+
+                  return '' +
+                    '<div class="' + wrapperClasses + '">' +
+                      '<button class="' + btnClasses + '" ' +
+                        (isLocked ? 'disabled' : '') +
+                        ' data-lesson-id="' + lesson.id + '"' +
+                        ' aria-label="' + (isLocked ? 'Заблокировано: ' : '') + escapeHtml(lesson.t) + '">' +
+                        icon +
+                      '</button>' +
+                      '<div class="node-title">' + escapeHtml(lesson.t.replace(/^⚡\s*/, '')) + '</div>' +
+                      '<div class="node-status">' + nodeStatus + '</div>' +
+                    '</div>';
+                }).join('') +
+              '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    // ==========================================
+    // INTERACTIVE LESSON PLAYER
+    // ==========================================
+    function openLessonPlayer(lessonId) {
+      var lesson = Data.LESSONS.find(function(l) { return l.id === lessonId; });
+      if (!lesson) return;
+      var lessonRun = Core.createLessonRun(state, lesson.id, lesson.id);
+      if (!lessonRun) return;
+      var canAnswer = lessonRun.status === 'unanswered' && lessonRun.attemptsUsed === 0;
+      var showSolution = false;
+
+      function renderPlayer() {
+        var exhausted = lessonRun.status === 'exhausted';
+        var solved = lessonRun.status === 'completed';
+        var selectedId = lessonRun.selectedOptionId;
+        var currentHint = lessonRun.hintLevel > 0 && lessonRun.hintLevel < 3
+          ? Core.getAttemptHint(lesson, lessonRun.hintLevel)
+          : '';
+        var main = document.getElementById('main-content');
+        main.innerHTML = '' +
+          '<div class="lesson-player">' +
+            '<div class="lesson-heading">' +
+              '<button class="btn btn-sm btn-alt" id="btn-exit-lesson">← К карте обучения</button>' +
+              '<div class="kicker" style="margin-top:16px;">' + escapeHtml(Data.WORLDS[lesson.w].title) + '</div>' +
+              '<h1 style="font-size:25px; line-height:1.25;">' + escapeHtml(lesson.t.replace(/^⚡\s*/, '')) + '</h1>' +
+              '<div class="lesson-progress"><span>Вопрос 1 из 1</span><span>·</span><span class="attempt-meter">Попытка ' + Math.min(lessonRun.attemptsUsed + (canAnswer ? 1 : 0), 3) + ' из 3</span><span class="stat-pill heart-pill">💛 ' + state.hearts + '</span></div>' +
+            '</div>' +
+            '<section class="card">' +
+              '<div class="theory-box"><b>Короткая теория</b><br>' + escapeHtml(lesson.theory) + '</div>' +
+              '<div class="example-box"><b>Пример из жизни</b><br>' + escapeHtml(lesson.example) + '</div>' +
+              '<h2 class="lesson-question">' + escapeHtml(lesson.question || lesson.q) + '</h2>' +
+              '<div id="lesson-choices-box">' + lesson.options.map(function(opt, idx) {
+                var isSelectedWrong = selectedId === opt.id && lessonRun.result && !lessonRun.result.isCorrect;
+                var className = 'choice-btn' + (isSelectedWrong ? ' wrong' : solved && selectedId === opt.id ? ' correct' : '');
+                var disabled = !canAnswer || solved || exhausted ? 'disabled' : '';
+                return '<button class="' + className + '" data-option-id="' + escapeHtml(opt.id) + '" ' + disabled + '>' +
+                  '<span style="display:flex;align-items:center;gap:10px;text-align:left;"><span style="font-weight:800;color:var(--color-text-secondary);">' + String.fromCharCode(65 + idx) + '</span><span>' + escapeHtml(opt.text) + '</span></span>' +
+                  (isSelectedWrong ? '<span class="choice-badge badge-danger">' + iconSvg('CircleX', 14) + ' Неверно</span>' : solved && selectedId === opt.id ? '<span class="choice-badge badge-success">' + iconSvg('CircleCheck', 14) + ' Верно</span>' : '') +
+                '</button>';
+              }).join('') + '</div>' +
+              (lessonRun.status === 'incorrect' && !canAnswer
+                ? '<div class="lesson-message error"><b>Пока не совсем так.</b><div style="margin-top:6px;">' + escapeHtml(currentHint) + '</div><div style="margin-top:8px;font-size:13px;">' + (lessonRun.attemptsUsed === 2 ? 'Осталась последняя попытка.' : 'Подумай над принципом и попробуй ещё раз.') + '</div></div>'
+                : '') +
+              (lessonRun.status === 'incorrect' && canAnswer
+                ? '<div class="lesson-message neutral">Подсказка ' + lessonRun.hintLevel + ': ' + escapeHtml(currentHint) + '</div>'
+                : '') +
+              (lessonRun.status === 'unanswered' && lessonRun.hintLevel > 0
+                ? '<div class="lesson-message neutral">Подсказка ' + lessonRun.hintLevel + ': ' + escapeHtml(Core.getAttemptHint(lesson, lessonRun.hintLevel)) + '</div>'
+                : '') +
+              (solved
+                ? '<div class="lesson-message success"><b>Верно. Принцип применён правильно.</b><div style="margin-top:6px;">' + escapeHtml(lesson.explanation) + '</div><div style="margin-top:8px;font-size:13px;">' + escapeHtml(lesson.summary) + '</div><div style="margin-top:10px;font-weight:750;">+' + lessonRun.rewardResult.xpGained + ' XP' + (lessonRun.rewardResult.coinsGained ? ', +' + lessonRun.rewardResult.coinsGained + ' ЛайфКоинов' : '') + (lessonRun.rewardResult.rankUp ? ' · Новый ранг: ' + escapeHtml(lessonRun.rewardResult.newRank.name) : '') + '</div></div>'
+                : '') +
+              (exhausted
+                ? '<div class="lesson-message neutral"><b>Давай разберём принцип.</b><div style="margin-top:6px;">' + escapeHtml(lesson.theory) + '</div>' + (showSolution ? '<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--color-border);"><b>Разбор решения:</b> ' + escapeHtml(lesson.options.find(function(opt) { return opt.id === lesson.correctOptionId; }).text) + '<br>' + escapeHtml(lesson.explanation) + '</div>' : '') + '</div>'
+                : '') +
+              '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">' +
+                (lessonRun.status === 'incorrect' && !canAnswer ? '<button class="btn" id="btn-next-attempt">Продолжить к попытке ' + (lessonRun.attemptsUsed + 1) + ' →</button>' : '') +
+                (exhausted ? '<button class="btn btn-alt" id="btn-review-solution">' + (showSolution ? 'Скрыть разбор' : 'Разобрать решение') + '</button><button class="btn" id="btn-restart-lesson">Повторить уровень</button>' : '') +
+                (solved || exhausted ? '<button class="btn btn-alt" id="btn-exit-to-map">Вернуться к карте</button>' : '') +
+                (!solved && !exhausted ? '<button class="btn btn-sm btn-alt" id="btn-request-hint" ' + (lessonRun.hintLevel >= 2 ? 'disabled' : '') + '>' + iconSvg('Lightbulb', 16) + ' Ещё подсказка</button>' : '') +
+              '</div>' +
+            '</section>' +
+          '</div>';
+
+        document.getElementById('btn-exit-lesson').onclick = function() { navigateTo('learn'); };
+        var nextAttempt = document.getElementById('btn-next-attempt');
+        if (nextAttempt) nextAttempt.onclick = function() { canAnswer = true; renderPlayer(); };
+        var hintBtn = document.getElementById('btn-request-hint');
+        if (hintBtn) hintBtn.onclick = function() {
+          lessonRun.hintLevel = Math.min(2, lessonRun.hintLevel + 1);
+          saveState();
+          renderPlayer();
+        };
+        var reviewBtn = document.getElementById('btn-review-solution');
+        if (reviewBtn) reviewBtn.onclick = function() { showSolution = !showSolution; renderPlayer(); };
+        var restartBtn = document.getElementById('btn-restart-lesson');
+        if (restartBtn) restartBtn.onclick = function() {
+          lessonRun = Core.restartLessonRun(state, lesson.id, lesson.id);
+          canAnswer = true;
+          showSolution = false;
+          saveState();
+          renderPlayer();
+        };
+        var exitMap = document.getElementById('btn-exit-to-map');
+        if (exitMap) exitMap.onclick = function() { navigateTo('learn'); };
+
+        document.querySelectorAll('#lesson-choices-box .choice-btn').forEach(function(btn) {
+          btn.onclick = function() {
+            if (!canAnswer || (lessonRun.status !== 'unanswered' && lessonRun.status !== 'incorrect')) return;
+            canAnswer = false;
+            var submission = Core.submitLessonAnswer(lessonRun, lesson, btn.getAttribute('data-option-id'));
+            if (!submission.accepted) {
+              canAnswer = true;
+              showToast(submission.reason || 'Не удалось проверить ответ.');
+              return;
+            }
+            if (submission.isCorrect) {
+              lessonRun.completed = true;
+              lessonRun.eligibleForReward = true;
+              lessonRun.skillPoints = lesson.skills || { discipline: 2, independence: 2, planning: 2, organization: 2 };
+              lessonRun.rewardXP = 25;
+              lessonRun.rewardCoins = 10;
+              lessonRun.rewardResult = Core.awardLessonReward(lessonRun, state);
+              lessonRun.status = 'completed';
+              Core.clearLessonMistake(state, lesson.id);
+              if (lessonRun.attemptsUsed === 1) dailyMissionsDone(true);
+              playSound('success');
+            } else {
+              Core.applyHeartLoss(state);
+              Core.recordLessonMistake(state, lesson.id);
+              playSound('error');
+              if (submission.status === 'exhausted') {
+                lessonRun.completed = true;
+                lessonRun.eligibleForReward = false;
+              }
+            }
+            saveState();
+            updateTopStats();
+            renderPlayer();
+            if (!submission.isCorrect && state.hearts <= 0 && !state.noPressure) {
+              showToast('💛 Энергия закончилась. Включи режим «Без давления» в профиле.');
+            }
+          };
+        });
+      }
+
+      saveState();
+      renderPlayer();
+    }
+
+    function dailyMissionsDone(isLesson) {
+      var d = checkDailyMissions();
+      if (isLesson) d.lessonDone = true;
+      else d.toolUsed = true;
+      saveState();
+    }
+
+    // ==========================================
+    // VIEW: TOOLS (ADULT TOOLBOX)
+    // ==========================================
+    function renderToolsView() {
+      var tabs = [
+        { id: 'budget', name: '💰 Калькулятор 50/30/20' },
+        { id: 'matrix', name: '🎯 Матрица Эйзенхауэра' },
+        { id: 'shopping', name: '🛒 Список покупок' },
+        { id: 'compare', name: '⚖️ Сравнение за 1 кг' },
+        { id: 'star', name: '💼 Конструктор STAR' },
+        { id: 'laundry', name: '🧺 Значки стирки' },
+        { id: 'emergency', name: '🚨 ЧП-Блиц' }
+      ];
+
+      return '' +
+        '<div class="page-title">' +
+          '<h1>Взрослый Тулбокс</h1>' +
+          '<p>Практические инструменты для решения реальных задач без стресса</p>' +
+        '</div>' +
+        '<div class="tabs-bar">' +
+          tabs.map(function(t) {
+            return '<button class="tab-btn ' + (currentToolTab === t.id ? 'active' : '') + '" data-tool-tab="' + t.id + '">' + t.name + '</button>';
+          }).join('') +
+        '</div>' +
+        '<div id="tool-tab-content">' +
+          renderCurrentToolContent() +
+        '</div>';
+    }
+
+    function renderCurrentToolContent() {
+      if (currentToolTab === 'budget') return renderBudgetTool();
+      if (currentToolTab === 'matrix') return renderMatrixTool();
+      if (currentToolTab === 'shopping') return renderShoppingTool();
+      if (currentToolTab === 'compare') return renderPriceCompareTool();
+      if (currentToolTab === 'star') return renderStarTool();
+      if (currentToolTab === 'laundry') return renderLaundryTool();
+      if (currentToolTab === 'emergency') return renderEmergencyTool();
+      return '';
+    }
+
+    // 1. Budget Tool
+    function renderBudgetTool() {
+      var b = state.budgetPlan || { income: 250000, needsPercent: 50, wantsPercent: 30, savingsPercent: 20 };
+      var calc = Core.calculateBudget(b.income, b.needsPercent, b.wantsPercent, b.savingsPercent);
+
+      return '' +
+        '<div class="grid">' +
+          '<div class="card col-6">' +
+            '<div class="kicker">Финансовое планирование</div>' +
+            '<h2>Планировщик бюджета 50/30/20</h2>' +
+            '<p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:14px;">50% — обязательные счета, 30% — комфорт и желания, 20% — цели и резервы. Ориентир гибкий!</p>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Ежемесячный доход, ₸</label>' +
+              '<input type="number" id="budget-income-input" class="input-field" value="' + b.income + '" min="1" step="1000">' +
+            '</div>' +
+            '<div class="grid" style="gap:10px;">' +
+              '<div class="col-4">' +
+                '<label class="form-label">Нужды, %</label>' +
+                '<input type="number" id="budget-needs-input" class="input-field" value="' + b.needsPercent + '" min="0" max="100">' +
+              '</div>' +
+              '<div class="col-4">' +
+                '<label class="form-label">Желания, %</label>' +
+                '<input type="number" id="budget-wants-input" class="input-field" value="' + b.wantsPercent + '" min="0" max="100">' +
+              '</div>' +
+              '<div class="col-4">' +
+                '<label class="form-label">Цели, %</label>' +
+                '<input type="number" id="budget-savings-input" class="input-field" value="' + b.savingsPercent + '" min="0" max="100">' +
+              '</div>' +
+            '</div>' +
+            '<div style="margin-top:16px;">' +
+              '<button class="btn btn-sm" id="btn-calc-budget">Рассчитать бюджет</button>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="card col-6">' +
+            '<div class="kicker">Результаты расчёта</div>' +
+            '<h2>Распределение средств</h2>' +
+            (calc.valid
+              ? '<div style="margin-bottom:14px;">' +
+                  '<div class="task-item"><b>🏠 Обязательные нужды:</b> <span>' + calc.needsAmount.toLocaleString('ru-RU') + ' ₸ (' + calc.needsPercent + '%)</span></div>' +
+                  '<div class="task-item"><b>☕ Личные желания:</b> <span>' + calc.wantsAmount.toLocaleString('ru-RU') + ' ₸ (' + calc.wantsPercent + '%)</span></div>' +
+                  '<div class="task-item"><b>🎯 Цели и накопления:</b> <span>' + calc.savingsAmount.toLocaleString('ru-RU') + ' ₸ (' + calc.savingsPercent + '%)</span></div>' +
+                '</div>' +
+                '<div class="example-box"><b>Совет:</b> ' + escapeHtml(calc.advice) + '</div>' +
+                (calc.alternative
+                  ? '<div class="theory-box" style="margin-top:10px;"><b>Альтернатива:</b> ' + calc.alternative.title + ' (Нужды: ' + calc.alternative.needsAmount.toLocaleString('ru-RU') + ' ₸)</div>'
+                  : '')
+              : '<div class="badge-pill" style="color:var(--color-danger);">' + escapeHtml(calc.error) + '</div>') +
+
+            '<div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--color-border);">' +
+              '<h3>Расчёт подушки безопасности</h3>' +
+              '<p style="font-size:12.5px; color:var(--color-text-secondary); margin-bottom:10px;">Считается строго от обязательных ежемесячных расходов, а не от дохода!</p>' +
+              '<div style="display:flex; gap:10px;">' +
+                '<input type="number" id="cushion-exp-input" class="input-field" placeholder="Обязательные расходы (₸)" value="' + (calc.valid ? calc.needsAmount : 150000) + '">' +
+                '<select id="cushion-months-select" class="input-field" style="max-width:140px;">' +
+                  '<option value="3">3 месяца</option>' +
+                  '<option value="6" selected>6 месяцев</option>' +
+                  '<option value="12">12 месяцев</option>' +
+                '</select>' +
+              '</div>' +
+              '<div id="cushion-result-box" style="margin-top:10px; font-weight:800; color:var(--color-primary);"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    // 2. Eisenhower Matrix Tool
+    function renderMatrixTool() {
+      var tasks = state.eisenhowerTasks || [];
+
+      function qTasks(q) {
+        return tasks.filter(function(t) { return t.quadrant === q; });
+      }
+
+      return '' +
+        '<div class="card" style="margin-bottom:18px;">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">' +
+            '<div>' +
+              '<h2>Матрица Эйзенхауэра</h2>' +
+              '<p style="font-size:13.5px; color:var(--color-text-secondary);">Распределяй задачи по важности и срочности. Инвестируй время во 2-й квадрант!</p>' +
+            '</div>' +
+            '<div style="display:flex; gap:8px; width:100%; max-width:440px;">' +
+              '<input type="text" id="new-matrix-task-text" class="input-field" placeholder="Новое дело...">' +
+              '<select id="new-matrix-task-q" class="input-field" style="width:170px;">' +
+                '<option value="1">Q1: Срочно+Важно</option>' +
+                '<option value="2" selected>Q2: Важно+Не срочно</option>' +
+                '<option value="3">Q3: Срочно+Не важно</option>' +
+                '<option value="4">Q4: Не важно</option>' +
+              '</select>' +
+              '<button class="btn btn-sm" id="btn-add-matrix-task">+</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="matrix-grid">' +
+          // Q1
+          '<div class="quadrant quadrant-1">' +
+            '<b>🔴 Q1: Важно и Срочно</b>' +
+            '<small style="color:var(--color-text-secondary); margin-bottom:10px;">Сделать в первую очередь (авралы, здоровье)</small>' +
+            renderQuadrantItems(qTasks(1)) +
+          '</div>' +
+          // Q2
+          '<div class="quadrant quadrant-2">' +
+            '<b>🟢 Q2: Важно, но Не срочно</b>' +
+            '<small style="color:var(--color-text-secondary); margin-bottom:10px;">Запланировать (стратегия, спорт, цели)</small>' +
+            renderQuadrantItems(qTasks(2)) +
+          '</div>' +
+          // Q3
+          '<div class="quadrant quadrant-3">' +
+            '<b>🟡 Q3: Срочно, но Не важно</b>' +
+            '<small style="color:var(--color-text-secondary); margin-bottom:10px;">Делегировать / упростить (чужие просьбы)</small>' +
+            renderQuadrantItems(qTasks(3)) +
+          '</div>' +
+          // Q4
+          '<div class="quadrant quadrant-4">' +
+            '<b>⚪ Q4: Не важно и Не срочно</b>' +
+            '<small style="color:var(--color-text-secondary); margin-bottom:10px;">Отложить / удалить (скроллинг, шум)</small>' +
+            renderQuadrantItems(qTasks(4)) +
+          '</div>' +
+        '</div>';
+    }
+
+    function renderQuadrantItems(items) {
+      if (!items || items.length === 0) {
+        return '<div style="font-size:12px; color:var(--color-text-secondary); margin-top:10px;">Задач нет.</div>';
+      }
+      return items.map(function(item) {
+        return '' +
+          '<div class="matrix-task-item">' +
+            '<input type="checkbox" class="task-checkbox" data-matrix-toggle="' + item.id + '" ' + (item.done ? 'checked' : '') + '>' +
+            '<span style="flex:1; ' + (item.done ? 'text-decoration:line-through; opacity:0.5;' : '') + '">' + escapeHtml(item.text) + '</span>' +
+            '<button class="icon-btn" style="width:26px; height:26px; font-size:12px;" data-matrix-del="' + item.id + '" title="Удалить">✕</button>' +
+          '</div>';
+      }).join('');
+    }
+
+    // 3. Shopping List Tool
+    function renderShoppingTool() {
+      var list = state.shoppingList || [];
+      var budget = state.shoppingBudget || 5000;
+      var totals = Core.calculateShoppingTotals(list, budget);
+
+      return '' +
+        '<div class="grid">' +
+          '<div class="card col-7">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">' +
+              '<h2>Список покупок</h2>' +
+              '<span class="badge-pill">Итого: ' + totals.total.toLocaleString('ru-RU') + ' ₸</span>' +
+            '</div>' +
+            (totals.isOverBudget
+              ? '<div class="badge-pill" style="color:var(--color-danger); background:var(--color-danger-light); margin-bottom:14px; width:100%; justify-content:center;">' +
+                  '⚠️ Внимание! Превышение бюджета корзины на ' + totals.diff.toLocaleString('ru-RU') + ' ₸!' +
+                '</div>'
+              : '') +
+            '<div style="display:flex; gap:8px; margin-bottom:16px;">' +
+              '<input type="text" id="shop-new-name" class="input-field" placeholder="Товар (напр. Гречка)">' +
+              '<input type="number" id="shop-new-qty" class="input-field" style="width:75px;" value="1" min="1">' +
+              '<input type="number" id="shop-new-price" class="input-field" style="width:110px;" placeholder="Цена, ₸">' +
+              '<button class="btn btn-sm" id="btn-add-shop-item">Добавить</button>' +
+            '</div>' +
+            '<div>' +
+              list.map(function(item) {
+                var sum = (item.qty || 1) * (item.unitPrice || 0);
+                return '' +
+                  '<div class="task-item">' +
+                    '<input type="checkbox" class="task-checkbox" data-shop-toggle="' + item.id + '" ' + (item.done ? 'checked' : '') + '>' +
+                    '<div style="flex:1; ' + (item.done ? 'text-decoration:line-through; opacity:0.5;' : '') + '">' +
+                      '<b>' + escapeHtml(item.name) + '</b> ' +
+                      '<small style="color:var(--color-text-secondary);">' + item.qty + ' шт × ' + (item.unitPrice || 0) + ' ₸ = ' + sum.toLocaleString('ru-RU') + ' ₸</small>' +
+                    '</div>' +
+                    '<button class="icon-btn" style="width:28px; height:28px; font-size:12px;" data-shop-del="' + item.id + '">✕</button>' +
+                  '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+
+          '<div class="card col-5">' +
+            '<h2>Плановый лимит корзины</h2>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Бюджет на поход в магазин, ₸</label>' +
+              '<input type="number" id="shop-budget-limit-input" class="input-field" value="' + budget + '">' +
+            '</div>' +
+            '<button class="btn btn-sm btn-alt" id="btn-save-shop-budget">Обновить лимит</button>' +
+            '<div style="margin-top:20px; font-size:13.5px;">' +
+              '<div class="task-item"><span>Всего в списке:</span> <b>' + totals.total.toLocaleString('ru-RU') + ' ₸</b></div>' +
+              '<div class="task-item"><span>Уже куплено:</span> <b style="color:var(--color-success);">' + totals.boughtTotal.toLocaleString('ru-RU') + ' ₸</b></div>' +
+              '<div class="task-item"><span>Осталось купить:</span> <b>' + (totals.total - totals.boughtTotal).toLocaleString('ru-RU') + ' ₸</b></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    // 4. Price Compare Tool
+    function renderPriceCompareTool() {
+      return '' +
+        '<div class="card col-12" style="max-width:760px; margin:0 auto;">' +
+          '<div class="kicker">Умные покупки</div>' +
+          '<h2>Сравнение стоимости за 1 кг или 1 литр</h2>' +
+          '<p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:16px;">Помогает разоблачить маркетологов и шринкфляцию при разном объёме упаковок.</p>' +
+          '<div class="grid">' +
+            '<div class="col-6" style="background:var(--color-selected); padding:14px; border-radius:var(--radius-button);">' +
+              '<b>Товар А (Малая упаковка)</b>' +
+              '<div class="form-group" style="margin-top:10px;">' +
+                '<label class="form-label">Вес / объём (в граммах или мл)</label>' +
+                '<input type="number" id="comp-w-a" class="input-field" value="400">' +
+              '</div>' +
+              '<div class="form-group">' +
+                '<label class="form-label">Цена упаковки, ₸</label>' +
+                '<input type="number" id="comp-p-a" class="input-field" value="900">' +
+              '</div>' +
+            '</div>' +
+            '<div class="col-6" style="background:var(--color-selected); padding:14px; border-radius:var(--radius-button);">' +
+              '<b>Товар Б (Большая упаковка)</b>' +
+              '<div class="form-group" style="margin-top:10px;">' +
+                '<label class="form-label">Вес / объём (в граммах или мл)</label>' +
+                '<input type="number" id="comp-w-b" class="input-field" value="600">' +
+              '</div>' +
+              '<div class="form-group">' +
+                '<label class="form-label">Цена упаковки, ₸</label>' +
+                '<input type="number" id="comp-p-b" class="input-field" value="1260">' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="margin-top:16px;">' +
+            '<button class="btn btn-sm" id="btn-calc-compare">Рассчитать выгоду</button>' +
+          '</div>' +
+          '<div id="compare-result-box" style="margin-top:16px;"></div>' +
+        '</div>';
+    }
+
+    // 5. STAR Constructor Tool
+    function renderStarTool() {
+      var notes = state.starNotes || [];
+      return '' +
+        '<div class="grid">' +
+          '<div class="card col-7">' +
+            '<div class="kicker">Карьерный конструктор</div>' +
+            '<h2>Конструктор историй по методу STAR</h2>' +
+            '<p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:14px;">Situation → Task → Action → Result. Собери убедительный ответ для интервью.</p>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Situation (Какова была ситуация/проблема?)</label>' +
+              '<textarea id="star-s" class="input-field" rows="2" placeholder="Например: в командном проекте сломалась база данных за 2 дня до сдачи..."></textarea>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Task (Какая конкретная задача стояла перед тобой?)</label>' +
+              '<textarea id="star-t" class="input-field" rows="2" placeholder="Например: быстро восстановить бэкап и не сорвать дедлайн..."></textarea>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Action (Какие конкретные действия предпринял(а) именно ТЫ?)</label>' +
+              '<textarea id="star-a" class="input-field" rows="2" placeholder="Например: созвонился с техподдержкой, написал скрипт восстановления..."></textarea>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label class="form-label">Result (Каков измеримый результат?)</label>' +
+              '<textarea id="star-r" class="input-field" rows="2" placeholder="Например: проект сдан вовремя, команда получила высший балл..."></textarea>' +
+            '</div>' +
+            '<button class="btn btn-sm" id="btn-save-star">Сохранить историю</button>' +
+          '</div>' +
+
+          '<div class="card col-5">' +
+            '<h2>Сохранённые истории (' + notes.length + ')</h2>' +
+            (notes.length === 0
+              ? '<div style="font-size:13px; color:var(--color-text-secondary);">Пока нет сохранённых кейсов. Напиши свой первый пример слева!</div>'
+              : notes.slice().reverse().map(function(n, idx) {
+                  return '' +
+                    '<div style="background:var(--color-selected); border:1px solid var(--color-border); border-radius:var(--radius-button); padding:12px; margin-bottom:10px;">' +
+                      '<div style="font-size:11px; color:var(--color-text-secondary); margin-bottom:6px;">История #' + (notes.length - idx) + '</div>' +
+                      '<div style="font-size:13px; white-space:pre-wrap;">' + escapeHtml(n.combined || n) + '</div>' +
+                      '<button class="btn btn-sm btn-alt" style="margin-top:8px;" data-copy-star="' + (notes.length - 1 - idx) + '">📋 Копировать</button>' +
+                    '</div>';
+                }).join('')) +
+          '</div>' +
+        '</div>';
+    }
+
+    // 6. Laundry Symbols Tool
+    function renderLaundryTool() {
+      return '' +
+        '<div class="card col-12">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:18px;">' +
+            '<div>' +
+              '<h2>Справочник значков стирки и ухода</h2>' +
+              '<p style="font-size:13.5px; color:var(--color-text-secondary);">Инструкция на бирке одежды первична. Проверяй перед стиркой!</p>' +
+            '</div>' +
+            '<input type="text" id="laundry-search-input" class="input-field" style="max-width:280px;" placeholder="🔍 Поиск значка...">' +
+          '</div>' +
+          '<div class="grid" id="laundry-grid-container">' +
+            Data.LAUNDRY_SYMBOLS.map(function(sym) {
+              return '' +
+                '<div class="col-4" style="background:var(--color-surface-subtle); border:1px solid var(--color-border); border-radius:var(--radius-button); padding:14px;">' +
+                  '<div style="font-size:24px; font-weight:900; margin-bottom:4px;">' + sym.icon + '</div>' +
+                  '<b>' + sym.name + '</b>' +
+                  '<p style="font-size:12.5px; color:var(--color-text-secondary); margin-top:4px;">' + sym.meaning + '</p>' +
+                '</div>';
+            }).join('') +
+          '</div>' +
+        '</div>';
+    }
+
+    // 7. Emergency Quick Guide
+    function renderEmergencyTool() {
+      return '' +
+        '<div class="grid">' +
+          '<div class="card col-12" style="background:linear-gradient(135deg, color-mix(in srgb, var(--color-danger-light) 70%, var(--color-surface)), var(--color-surface)); border:1px solid var(--color-danger); margin-bottom:16px;">' +
+            '<h2>🚨 ЧП-Блиц: алгоритмы действий в экстренных ситуациях</h2>' +
+            '<p style="font-size:14px;">В опасных ситуациях безопасность жизни всегда выше материальных ценностей. Сохраняй спокойствие!</p>' +
+          '</div>' +
+          Data.EMERGENCY_SCENARIOS.map(function(scen) {
+            return '' +
+              '<div class="card col-6" style="border-left:4px solid ' + scen.color + ';">' +
+                '<div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">' +
+                  '<span style="font-size:28px;">' + scen.icon + '</span>' +
+                  '<div>' +
+                    '<div class="kicker" style="color:' + scen.color + ';">' + scen.dangerLevel + '</div>' +
+                    '<h3 style="margin:0;">' + scen.title + '</h3>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="margin-top:12px; font-size:13.5px; line-height:1.5;">' +
+                  scen.steps.map(function(s) {
+                    return '<div style="margin-bottom:8px; padding-left:4px;">' + escapeHtml(s) + '</div>';
+                  }).join('') +
+                '</div>' +
+              '</div>';
+          }).join('') +
+        '</div>';
+    }
+
+    // ==========================================
+    // VIEW: CHARACTER & WARDROBE
+    // ==========================================
+    function renderCharacterView() {
+      var totalScore = Core.calculateTotalSkillScore(state.stats);
+      var rank = Core.getRankByScore(totalScore);
+
+      var skillsList = [
+        { key: 'discipline', name: 'Дисциплина', icon: 'ShieldCheck', val: state.stats.discipline || 0, desc: 'Завершение дел и регулярность' },
+        { key: 'independence', name: 'Самостоятельность', icon: 'Compass', val: state.stats.independence || 0, desc: 'Быт, безопасность и работа' },
+        { key: 'planning', name: 'Планирование', icon: 'CalendarClock', val: state.stats.planning || 0, desc: 'Бюджет, время и ресурсы' },
+        { key: 'organization', name: 'Организованность', icon: 'Folders', val: state.stats.organization || 0, desc: 'Порядок в вещах и файлах' }
+      ];
+
+      return '' +
+        '<div class="page-title">' +
+          '<h1>Мой персонаж и гардероб</h1>' +
+          '<p>Развивай 4 ключевые характеристики взрослости и примеряй награды</p>' +
+        '</div>' +
+        '<div class="grid">' +
+          // CHARACTER PROFILE
+          '<div class="card col-6">' +
+            '<div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">' +
+              renderAvatarMarkup(state.avatar, state.equippedItems, state.profileCardStyle) +
+              '<div>' +
+                '<div class="kicker">' + iconSvg('Trophy', 16) + ' ' + rank.name + '</div>' +
+                '<h2>' + escapeHtml(state.name) + '</h2>' +
+                '<div style="font-size:13px; color:var(--color-text-secondary);">Всего очков навыков: <b>' + totalScore + '</b></div>' +
+              '</div>' +
+            '</div>' +
+            '<h3>4 Характеристики взросления</h3>' +
+            '<div style="margin-top:12px;">' +
+              skillsList.map(function(s) {
+                var pct = Math.min(100, Math.round((s.val / 100) * 100));
+                return '' +
+                  '<div style="margin-bottom:12px;">' +
+                    '<div style="display:flex; justify-content:space-between; font-size:13px;">' +
+                      '<span><b>' + s.icon + ' ' + s.name + '</b> <small style="color:var(--color-text-secondary);">(' + s.desc + ')</small></span>' +
+                      '<b>' + s.val + ' pts</b>' +
+                    '</div>' +
+                    '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%;"></div></div>' +
+                  '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+
+          // WARDROBE & PETS SHOP
+          '<div class="card col-6">' +
+            '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">' +
+              '<div>' +
+                '<div class="kicker">Гардероб и питомцы</div>' +
+                '<h2>Магазин уюта</h2>' +
+              '</div>' +
+              '<span class="stat-pill coin-pill">' + iconSvg('Coins', 16) + ' ' + state.coins + '</span>' +
+            '</div>' +
+            '<div style="display:flex; flex-direction:column; gap:10px;">' +
+              Data.WARDROBE_ITEMS.map(function(item) {
+                var isOwned = state.ownedItems && state.ownedItems.indexOf(item.id) !== -1;
+                var isEquipped = state.equippedItems[item.type] === item.id;
+
+                return '' +
+                  '<div style="display:flex; align-items:center; justify-content:space-between; padding:10px; background:var(--color-selected); border:1px solid var(--color-border); border-radius:var(--radius-button);">' +
+                    '<div style="display:flex; align-items:center; gap:12px;">' +
+                      '<span class="wardrobe-icon">' + wardrobeIcon(item) + '</span>' +
+                      '<div>' +
+                        '<b>' + item.name + '</b>' +
+                        '<div style="font-size:12px; color:var(--color-text-secondary);">' + item.desc + '</div>' +
+                      '</div>' +
+                    '</div>' +
+                    '<div>' +
+                      (isOwned
+                        ? (isEquipped
+                            ? '<button class="btn btn-sm btn-alt" disabled>' + iconSvg('CircleCheck', 14) + ' Надето</button>'
+                            : '<button class="btn btn-sm btn-alt" data-equip-item="' + item.id + '" data-item-type="' + item.type + '">Надеть</button>')
+                        : '<button class="btn btn-sm" data-buy-item="' + item.id + '">' + iconSvg('Coins', 14) + ' ' + item.cost + '</button>') +
+                    '</div>' +
+                  '</div>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    // ==========================================
+    // VIEW: PROFILE & SETTINGS
+    // ==========================================
+    function renderThemeChoices() {
+      return '<div class="theme-grid">' + THEME_CATALOG.map(function(theme) {
+        var selected = state.theme === theme.id;
+        return '<button type="button" class="theme-choice ' + (selected ? 'selected' : '') + '" data-theme-choice="' + theme.id + '" aria-pressed="' + (selected ? 'true' : 'false') + '">' +
+          '<span class="theme-sample" style="background:' + theme.bg + ';border-color:' + theme.primary + '"><span style="background:' + theme.surface + ';border:1px solid ' + theme.primary + ';"></span><span style="background:' + theme.primary + '"></span><span style="background:' + theme.text + '"></span></span>' +
+          '<b>' + theme.name + '</b><br><span style="font-size:12px;color:var(--color-text-secondary);">' + theme.desc + '</span><br>' +
+          '<span class="theme-choice-status">' + (selected ? '✓ Выбрана' : 'Выбрать') + '</span>' +
+        '</button>';
+      }).join('') + '</div>';
+    }
+
+    function renderProfileView() {
+      var totalScore = Core.calculateTotalSkillScore(state.stats);
+      var rank = Core.getRankByScore(totalScore);
+      var passedCount = Object.keys(state.passedLessons || {}).filter(function(id) { return state.passedLessons[id]; }).length;
+      var achievements = Object.keys(state.achievements || {}).filter(function(id) { return state.achievements[id]; });
+      var skills = [
+        { icon: 'ShieldCheck', name: 'Дисциплина', value: state.stats.discipline || 0 },
+        { icon: 'Compass', name: 'Самостоятельность', value: state.stats.independence || 0 },
+        { icon: 'CalendarClock', name: 'Планирование', value: state.stats.planning || 0 },
+        { icon: 'Folders', name: 'Организованность', value: state.stats.organization || 0 }
+      ];
+
+      return '' +
+        '<div class="page-title">' +
+          '<h1>Профиль</h1>' +
+          '<p>Твои настройки и путь в LifeSkill</p>' +
+        '</div>' +
+        '<div class="grid">' +
+          '<section class="card col-12 profile-card-' + (state.profileCardStyle || 'standard') + '">' +
+            '<div class="profile-hero">' + renderProfilePhoto('profile-photo-large') + renderAvatarMarkup(state.avatar, state.equippedItems, state.profileCardStyle) +
+              '<div class="profile-identity"><div class="kicker">' + iconSvg('Trophy', 18) + ' ' + escapeHtml(rank.name) + '</div><h2>' + escapeHtml(state.name) + '</h2>' +
+                '<p style="color:var(--color-text-secondary);">' + escapeHtml(state.profileDescription || 'Добавь короткое описание о себе.') + '</p>' +
+                '<div class="profile-actions"><button class="btn btn-sm" id="btn-edit-profile">Редактировать профиль</button><button class="btn btn-sm btn-alt" id="btn-edit-photo">' + iconSvg('Camera', 16) + ' Изменить фото</button><button class="btn btn-sm btn-alt" id="btn-open-theme-settings">' + iconSvg('Settings', 16) + ' Настройки оформления</button></div>' +
+              '</div>' +
+            '</div>' +
+          '</section>' +
+          '<section class="card col-4"><div class="kicker">Ранг</div><h2>' + iconSvg('Trophy', 20) + ' ' + escapeHtml(rank.name) + '</h2><div style="color:var(--color-text-secondary);">' + totalScore + ' очков навыков</div></section>' +
+          '<section class="card col-4"><div class="kicker">Опыт</div><h2>' + iconSvg('Star', 20) + ' ' + state.xp + ' XP</h2><div style="color:var(--color-text-secondary);">Уровень ' + Core.getLevelByXP(state.xp) + '</div></section>' +
+          '<section class="card col-4"><div class="kicker">Путь</div><h2>' + passedCount + ' / ' + Data.LESSONS.length + ' уроков</h2><div style="color:var(--color-text-secondary);">' + iconSvg('Flame', 16) + ' ' + state.streak + ' дн.</div></section>' +
+          '<section class="card col-12"><h2>Характеристики персонажа</h2><div class="profile-skills">' + skills.map(function(skill) {
+            return '<div class="profile-skill"><b>' + iconSvg(skill.icon, 18) + ' ' + skill.name + '</b><div style="font-size:20px;font-weight:800;margin-top:4px;">' + skill.value + '</div></div>';
+          }).join('') + '</div></section>' +
+          '<section class="card col-6"><h2>Достижения</h2><div class="profile-stat"><b>' + achievements.length + ' открыто</b></div>' +
+            (achievements.length ? '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">' + achievements.map(function(id) { return '<span class="badge-pill">' + iconSvg('Trophy', 14) + ' ' + escapeHtml(id.replace(/[_-]+/g, ' ')) + '</span>'; }).join('') + '</div>' : '<p style="color:var(--color-text-secondary);">Пока нет открытых достижений.</p>') +
+          '</section>' +
+          '<section class="card col-6"><h2>Предпочтения интерфейса</h2>' +
+            '<label class="task-item"><input type="checkbox" id="profile-sound-chk" class="task-checkbox" ' + (state.soundEnabled ? 'checked' : '') + '><span>Звуковые эффекты</span></label>' +
+            '<label class="task-item"><input type="checkbox" id="profile-motion-chk" class="task-checkbox" ' + (state.reducedMotion ? 'checked' : '') + '><span>Уменьшить анимации</span></label>' +
+            '<label class="task-item"><input type="checkbox" id="profile-pressure-chk" class="task-checkbox" ' + (state.noPressure ? 'checked' : '') + '><span>Режим обучения без штрафа сердечек</span></label>' +
+          '</section>' +
+          '<section class="card col-12" id="theme-settings"><div style="display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap;margin-bottom:14px;"><div><div class="kicker">Персонализация интерфейса</div><h2>Настройки оформления</h2><p style="color:var(--color-text-secondary);">Выбранная тема применяется сразу и сохраняется в профиле.</p></div><span class="badge-pill">' + escapeHtml(getThemeById(state.theme).name) + '</span></div>' + renderThemeChoices() + '</section>' +
+          (authMode === 'signed-in'
+            ? '<section class="card col-12"><div class="kicker">Аккаунт</div><h2>' + iconSvg('Mail', 18) + ' ' + escapeHtml(authAccount.email) + '</h2><p style="color:var(--color-text-secondary);">Подтверждённый адрес · игровой прогресс синхронизируется с сервером.</p><div class="profile-actions"><button class="btn btn-sm btn-alt" id="btn-auth-logout">' + iconSvg('LogOut', 16) + ' Выйти</button><button class="btn btn-sm btn-danger" id="btn-auth-delete">Удалить аккаунт и данные</button></div></section>'
+            : '<section class="card col-12"><div class="kicker">Локальное сохранение</div><h2>Прогресс хранится в этом браузере</h2><p style="color:var(--color-text-secondary);">' + (location.protocol === 'file:' ? 'Для входа по email запусти серверную версию LifeSkill.' : 'Можно войти по email и перенести локальный прогресс в новый аккаунт.') + '</p>' + (location.protocol === 'file:' ? '' : '<button class="btn btn-sm" id="btn-auth-start">' + iconSvg('Mail', 16) + ' Войти по email</button>') + '</section>') +
+          '<section class="card col-12"><h2>Управление данными и резервные копии</h2>' +
+            '<p style="font-size:13.5px;color:var(--color-text-secondary);margin-bottom:16px;">' + (authMode === 'signed-in' ? 'Данные аккаунта хранятся на сервере; резервная копия экспортируется в файл.' : 'Все данные локального режима хранятся в этом браузере. Регулярно скачивай резервную копию.') + '</p>' +
+            '<div style="display:flex; flex-direction:column; gap:10px;">' +
+              '<button class="btn btn-sm btn-alt" id="btn-export-json">' + iconSvg('Download', 16) + ' Экспортировать прогресс в JSON</button>' +
+              '<label class="btn btn-sm btn-alt" style="cursor:pointer; text-align:center;">' +
+                iconSvg('Upload', 16) + ' Восстановить прогресс из файла' +
+                '<input type="file" id="input-import-json" accept=".json" style="display:none;">' +
+              '</label>' +
+              '<button class="btn btn-sm btn-danger" style="margin-top:14px;" id="btn-reset-all">' + iconSvg('Trash2', 16) + ' Сбросить весь прогресс</button>' +
+            '</div>' +
+            '<div style="margin-top:20px; font-size:12px; color:var(--color-text-secondary);">' +
+              'LifeSkill v3.0 Fresh Mint · Все права защищены. Данные хранятся локально.' +
+            '</div>' +
+          '</section>' +
+        '</div>';
+    }
+
+    function openProfileEditor() {
+      var modal = document.getElementById('modal-container');
+      var draft = {
+        name: state.name,
+        description: state.profileDescription || '',
+        cardStyle: state.profileCardStyle || 'standard',
+        avatar: Object.assign({}, state.avatar),
+        equippedItems: Object.assign({}, state.equippedItems)
+      };
+      modal.className = 'modal-overlay profile-editor-modal';
+      modal.style.display = 'grid';
+      modal.innerHTML = '<div class="modal-card profile-editor-card" role="document"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div><div class="kicker">Личные данные</div><h2 style="margin:0;">Редактировать профиль</h2></div><button class="icon-btn" id="btn-close-profile-editor" aria-label="Закрыть">✕</button></div>' +
+        '<form id="profile-editor-form" novalidate><div class="profile-editor-layout"><div>' +
+          '<label class="form-label" for="edit-profile-name">Игровой псевдоним</label><input id="edit-profile-name" class="input-field" type="text" maxlength="30" autocomplete="nickname" value="' + escapeHtml(draft.name) + '">' +
+          '<label class="form-label" for="edit-profile-description" style="margin-top:12px;">О себе · необязательно</label><textarea id="edit-profile-description" class="input-field" rows="3" maxlength="160" placeholder="Короткая заметка о себе">' + escapeHtml(draft.description) + '</textarea><small id="profile-description-count" style="color:var(--color-text-secondary);">' + draft.description.length + '/160</small>' +
+          '<div class="form-group" style="margin-top:14px;"><label class="form-label" for="edit-avatar-base">Аватар</label><select id="edit-avatar-base" class="input-field"><option value="🧑">Исследователь</option><option value="👩">Персонаж</option><option value="👨">Персонаж</option><option value="🧑‍🎓">Ученик</option><option value="🧑‍💻">Специалист</option></select></div>' +
+          '<div class="form-group"><span class="form-label">Цвет персонажа</span><div class="avatar-color-options">' + AVATAR_COLORS.map(function(color) { return '<button type="button" class="avatar-color ' + (draft.avatar.color === color ? 'selected' : '') + '" data-avatar-color="' + color + '" style="background:' + color + '" aria-label="Цвет ' + color + '" aria-pressed="' + (draft.avatar.color === color) + '"></button>'; }).join('') + '</div></div>' +
+          '<div class="form-group"><label class="form-label" for="edit-avatar-clothes">Одежда · гардероб</label><select id="edit-avatar-clothes" class="input-field">' + renderOwnedItemOptions('clothes', draft.equippedItems.clothes) + '</select></div>' +
+          '<div class="form-group"><label class="form-label" for="edit-avatar-accessory">Аксессуар</label><select id="edit-avatar-accessory" class="input-field">' + renderOwnedItemOptions('accessory', draft.equippedItems.accessory) + '</select></div>' +
+          '<div class="form-group"><label class="form-label" for="edit-avatar-companion">Компаньон</label><select id="edit-avatar-companion" class="input-field">' + renderOwnedItemOptions('companion', draft.equippedItems.companion) + '</select></div>' +
+          '<div class="form-group"><label class="form-label" for="edit-profile-card-style">Оформление карточки профиля</label><select id="edit-profile-card-style" class="input-field"><option value="standard">Стандартное</option><option value="soft">Мягкий акцент</option><option value="outlined">Контур</option></select></div>' +
+          '<div class="profile-error" id="profile-editor-error" role="alert"></div><div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn" type="submit">Сохранить изменения</button><button class="btn btn-alt" type="button" id="btn-cancel-profile-editor">Отмена</button></div>' +
+        '</div><aside class="profile-editor-preview"><b>Предпросмотр</b><div class="profile-photo-preview">\u0424\u043e\u0442\u043e \u043f\u0440\u043e\u0444\u0438\u043b\u044f: ' + renderProfilePhoto('') + '</div><div id="profile-avatar-preview"></div><strong id="profile-name-preview"></strong><small id="profile-description-preview" style="color:var(--color-text-secondary);text-align:center;"></small></aside></div></form></div>';
+
+      var baseSelect = document.getElementById('edit-avatar-base');
+      baseSelect.value = draft.avatar.base || '🧑';
+      document.getElementById('edit-profile-card-style').value = draft.cardStyle;
+      function updatePreview() {
+        var preview = document.getElementById('profile-avatar-preview');
+        if (!preview) return;
+        preview.innerHTML = renderAvatarMarkup(draft.avatar, draft.equippedItems, draft.cardStyle);
+        document.getElementById('profile-name-preview').textContent = draft.name.trim() || 'Имя персонажа';
+        document.getElementById('profile-description-preview').textContent = draft.description || 'Описание профиля';
+      }
+      function closeEditor() {
+        modal.style.display = 'none';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = '';
+      }
+      document.getElementById('edit-profile-name').oninput = function(event) { draft.name = event.target.value; updatePreview(); };
+      document.getElementById('edit-profile-description').oninput = function(event) {
+        draft.description = event.target.value;
+        document.getElementById('profile-description-count').textContent = draft.description.length + '/160';
+        updatePreview();
+      };
+      baseSelect.onchange = function() { draft.avatar.base = baseSelect.value; updatePreview(); };
+      document.getElementById('edit-avatar-clothes').onchange = function(event) { draft.equippedItems.clothes = event.target.value; updatePreview(); };
+      document.getElementById('edit-avatar-accessory').onchange = function(event) { draft.equippedItems.accessory = event.target.value; updatePreview(); };
+      document.getElementById('edit-avatar-companion').onchange = function(event) { draft.equippedItems.companion = event.target.value; updatePreview(); };
+      document.getElementById('edit-profile-card-style').onchange = function(event) { draft.cardStyle = event.target.value; updatePreview(); };
+      document.querySelectorAll('[data-avatar-color]').forEach(function(button) {
+        button.onclick = function() {
+          draft.avatar.color = button.getAttribute('data-avatar-color');
+          document.querySelectorAll('[data-avatar-color]').forEach(function(option) {
+            var selected = option === button;
+            option.classList.toggle('selected', selected);
+            option.setAttribute('aria-pressed', selected ? 'true' : 'false');
+          });
+          updatePreview();
+        };
+      });
+      document.getElementById('btn-close-profile-editor').onclick = closeEditor;
+      document.getElementById('btn-cancel-profile-editor').onclick = closeEditor;
+      modal.onclick = function(event) { if (event.target === modal) closeEditor(); };
+      document.getElementById('profile-editor-form').onsubmit = function(event) {
+        event.preventDefault();
+        draft.name = document.getElementById('edit-profile-name').value;
+        draft.description = document.getElementById('edit-profile-description').value;
+        var result = Core.applyProfileSettings(state, {
+          name: draft.name,
+          description: draft.description,
+          cardStyle: draft.cardStyle,
+          avatar: draft.avatar,
+          equippedItems: draft.equippedItems,
+          theme: state.theme
+        });
+        if (!result.success) {
+          document.getElementById('profile-editor-error').textContent = result.error;
+          return;
+        }
+        saveState();
+        closeEditor();
+        renderApp();
+        showToast('Изменения профиля сохранены');
+      };
+      updatePreview();
+      document.getElementById('edit-profile-name').focus();
+    }
+
+    // ==========================================
+    // SPECIAL MODALS: FIRST WEEK & MONTH SIMULATION
+    // ==========================================
+    function openFirstWeekModal() {
+      var modal = document.getElementById('modal-container');
+      modal.style.display = 'grid';
+      modal.innerHTML = '' +
+        '<div class="modal-card">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">' +
+            '<h2>📅 Моя 1-я самостоятельная неделя</h2>' +
+            '<button class="icon-btn" id="btn-close-modal">✕</button>' +
+          '</div>' +
+          '<p style="font-size:13.5px; color:var(--color-text-secondary); margin-bottom:16px;">Пошаговый семидневный маршрут адаптации к взрослой жизни. Порядок гибкий!</p>' +
+          '<div>' +
+            Data.FIRST_WEEK_CURRICULUM.map(function(day) {
+              var isDone = !!state.firstWeek.completedDays[day.day];
+              return '' +
+                '<div style="display:flex; align-items:center; justify-content:space-between; padding:12px; margin-bottom:8px; background:var(--color-selected); border:1px solid var(--color-border); border-radius:var(--radius-button);">' +
+                  '<div>' +
+                    '<b>' + day.title + '</b>' +
+                    '<div style="font-size:12.5px; color:var(--color-text-secondary);">' + day.desc + '</div>' +
+                  '</div>' +
+                  '<button class="btn btn-sm ' + (isDone ? 'btn-alt' : '') + '" data-week-day="' + day.day + '" ' + (isDone ? 'disabled' : '') + '>' +
+                    (isDone ? 'Выполнено ✓' : 'Начать') +
+                  '</button>' +
+                '</div>';
+            }).join('') +
+          '</div>' +
+        '</div>';
+
+      document.getElementById('btn-close-modal').onclick = function() {
+        modal.style.display = 'none';
+      };
+
+      modal.querySelectorAll('[data-week-day]').forEach(function(b) {
+        b.onclick = function() {
+          var d = +b.getAttribute('data-week-day');
+          if (state.firstWeek.completedDays[d]) return;
+          state.firstWeek.completedDays[d] = true;
+          state.xp += 15;
+          var dm = checkDailyMissions();
+          dm.weekDone = true;
+          saveState();
+          showToast('Шаг дня ' + d + ' выполнен! +15 XP');
+          modal.style.display = 'none';
+          renderApp();
+        };
+      });
+    }
+
+    function openMonthSimModal() {
+      var modal = document.getElementById('modal-container');
+      modal.style.display = 'grid';
+      var sim = state.monthSimulation || { day: 1, maxDays: 30, money: 180000, energy: 100, stress: 20, completed: false, history: [] };
+
+      var currentEvent = Data.MONTH_SIMULATION_EVENTS.find(function(e) { return e.day >= sim.day; }) || Data.MONTH_SIMULATION_EVENTS[Data.MONTH_SIMULATION_EVENTS.length - 1];
+
+      modal.innerHTML = '' +
+        '<div class="modal-card">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">' +
+            '<h2>🏙️ Симулятор: Месяц взрослой жизни</h2>' +
+            '<button class="icon-btn" id="btn-close-modal">✕</button>' +
+          '</div>' +
+          '<div class="hero-stats-row" style="margin-bottom:14px;">' +
+            '<div class="mini-stat-box"><b>День ' + sim.day + '/30</b><small>Прогресс</small></div>' +
+            '<div class="mini-stat-box"><b>' + sim.money.toLocaleString('ru-RU') + ' ₸</b><small>Деньги</small></div>' +
+            '<div class="mini-stat-box"><b>⚡ ' + sim.energy + '%</b><small>Энергия</small></div>' +
+            '<div class="mini-stat-box"><b>🧠 ' + sim.stress + '%</b><small>Стресс</small></div>' +
+          '</div>' +
+          '<div class="card" style="margin-bottom:16px;">' +
+            '<h3>' + currentEvent.title + '</h3>' +
+            '<p style="font-size:14px; margin-top:6px;">' + escapeHtml(currentEvent.desc) + '</p>' +
+            '<div style="margin-top:14px;">' +
+              currentEvent.choices.map(function(c, idx) {
+                return '<button class="choice-btn" data-sim-choice="' + idx + '" style="margin:8px 0;">' +
+                  '<span>👉 ' + escapeHtml(c.text) + '</span>' +
+                '</button>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+          (sim.history.length > 0
+            ? '<div style="font-size:12px; color:var(--color-text-secondary); max-height:100px; overflow-y:auto;">' +
+                '<b>История решений:</b><br>' +
+                sim.history.map(function(h) { return 'День ' + h.day + ': ' + h.note; }).join('<br>') +
+              '</div>'
+            : '') +
+        '</div>';
+
+      document.getElementById('btn-close-modal').onclick = function() {
+        modal.style.display = 'none';
+      };
+
+      modal.querySelectorAll('[data-sim-choice]').forEach(function(b) {
+        b.onclick = function() {
+          var idx = +b.getAttribute('data-sim-choice');
+          var choice = currentEvent.choices[idx];
+          Core.advanceMonthSimulation(sim, choice);
+          saveState();
+          playSound('success');
+          showToast(choice.note);
+          if (sim.completed) {
+            showToast('🎉 Месяц взрослой жизни пройден успешно! +50 XP');
+            state.xp += 50;
+            saveState();
+            modal.style.display = 'none';
+            renderApp();
+          } else {
+            openMonthSimModal();
+          }
+        };
+      });
+    }
+
+    // ==========================================
+    // GLOBAL APP RENDER & EVENT ATTACHMENT
+    // ==========================================
+
+    function detectPhotoType(bytes) {
+      if(bytes[0]===255&&bytes[1]===216&&bytes[2]===255)return 'image/jpeg';
+      if(bytes[0]===137&&bytes[1]===80&&bytes[2]===78&&bytes[3]===71)return 'image/png';
+      if(String.fromCharCode.apply(null,bytes.slice(0,4))==='RIFF'&&String.fromCharCode.apply(null,bytes.slice(8,12))==='WEBP')return 'image/webp';
+      return '';
+    }
+    function openPhotoEditor() {
+      var modal=document.getElementById('modal-container'), image=null, sourceURL='', photoSource=profilePhotoURL||profilePhotoDataURL, zoom=1, offsetX=0, offsetY=0, dragging=false, lastX=0, lastY=0;
+      modal.className='modal-overlay profile-editor-modal';modal.style.display='grid';
+      modal.innerHTML='<section class="modal-card photo-editor-card" role="document" aria-labelledby="photo-editor-title"><h2 id="photo-editor-title">\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f \u043f\u0440\u043e\u0444\u0438\u043b\u044f</h2><p>\u041f\u0435\u0440\u0435\u0442\u0430\u0441\u043a\u0438\u0432\u0430\u0439 \u0444\u043e\u0442\u043e \u0432 \u043a\u0440\u0443\u0433\u0435 \u0438 \u043d\u0430\u0441\u0442\u0440\u043e\u0439 \u043c\u0430\u0441\u0448\u0442\u0430\u0431.</p><div class="photo-crop-frame" id="photo-crop-frame"><canvas id="photo-crop-canvas" width="512" height="512" aria-label="\u041f\u0440\u0435\u0434\u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440 \u043a\u0430\u0434\u0440\u0430"></canvas></div><input id="photo-file" type="file" accept="image/jpeg,image/png,image/webp" hidden><div class="photo-editor-controls"><button class="btn btn-sm" type="button" id="photo-choose">\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0444\u043e\u0442\u043e</button><label for="photo-zoom">\u041c\u0430\u0441\u0448\u0442\u0430\u0431</label><input id="photo-zoom" type="range" min="1" max="3" step="0.01" value="1" disabled></div><small>JPEG, PNG \u0438 WebP, \u0434\u043e 5 \u041c\u0411.</small><div class="photo-editor-error" id="photo-error" role="alert"></div><div class="photo-editor-controls"><button class="btn btn-sm" type="button" id="photo-save" disabled>\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0444\u043e\u0442\u043e</button>'+(photoSource?'<button class="btn btn-sm btn-alt" type="button" id="photo-delete">\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0444\u043e\u0442\u043e</button>':'')+'<button class="btn btn-sm btn-alt" type="button" id="photo-cancel">\u041e\u0442\u043c\u0435\u043d\u0430</button></div></section>';
+      var canvas=document.getElementById('photo-crop-canvas'),ctx=canvas.getContext('2d'),error=document.getElementById('photo-error');
+      function close(){if(sourceURL)URL.revokeObjectURL(sourceURL);modal.style.display='none';modal.className='modal-overlay';modal.innerHTML='';}
+      function draw(){ctx.clearRect(0,0,512,512);if(!image)return;var side=Math.min(image.naturalWidth,image.naturalHeight)/zoom,cx=image.naturalWidth/2+offsetX,cy=image.naturalHeight/2+offsetY;cx=Math.max(side/2,Math.min(image.naturalWidth-side/2,cx));cy=Math.max(side/2,Math.min(image.naturalHeight-side/2,cy));ctx.drawImage(image,cx-side/2,cy-side/2,side,side,0,0,512,512);}
+      if(photoSource){image=new Image();image.onload=function(){document.getElementById('photo-zoom').disabled=false;document.getElementById('photo-save').disabled=false;draw();};image.src=photoSource;}
+      document.getElementById('photo-choose').onclick=function(){document.getElementById('photo-file').click();};
+      document.getElementById('photo-file').onchange=function(ev){var file=ev.target.files&&ev.target.files[0];if(!file)return;if(file.size>5*1024*1024){error.textContent='\u0424\u0430\u0439\u043b \u0431\u043e\u043b\u044c\u0448\u0435 5 \u041c\u0411.';ev.target.value='';return;}var reader=new FileReader();reader.onerror=function(){error.textContent='\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u0440\u043e\u0447\u0438\u0442\u0430\u0442\u044c \u0444\u0430\u0439\u043b.';};reader.onload=function(){var type=detectPhotoType(new Uint8Array(reader.result));if(!type){error.textContent='JPEG, PNG \u0438 WebP';return;}var blob=new Blob([reader.result],{type:type}),url=URL.createObjectURL(blob),img=new Image();img.onerror=function(){URL.revokeObjectURL(url);error.textContent='\u0424\u0430\u0439\u043b \u043f\u043e\u0432\u0440\u0435\u0436\u0434\u0451\u043d \u0438\u043b\u0438 \u043d\u0435 \u0447\u0438\u0442\u0430\u0435\u0442\u0441\u044f.';};img.onload=function(){if(sourceURL)URL.revokeObjectURL(sourceURL);sourceURL=url;image=img;zoom=1;offsetX=offsetY=0;error.textContent='';document.getElementById('photo-zoom').disabled=false;document.getElementById('photo-save').disabled=false;draw();};img.src=url;};reader.readAsArrayBuffer(file);};
+      document.getElementById('photo-zoom').oninput=function(ev){zoom=Number(ev.target.value);draw();};var frame=document.getElementById('photo-crop-frame');frame.onpointerdown=function(ev){if(!image)return;dragging=true;lastX=ev.clientX;lastY=ev.clientY;frame.setPointerCapture(ev.pointerId);};frame.onpointermove=function(ev){if(!dragging||!image)return;var scale=(Math.min(image.naturalWidth,image.naturalHeight)/zoom)/512;offsetX-=(ev.clientX-lastX)*scale;offsetY-=(ev.clientY-lastY)*scale;lastX=ev.clientX;lastY=ev.clientY;draw();};frame.onpointerup=frame.onpointercancel=function(){dragging=false;};
+      document.getElementById('photo-cancel').onclick=close;modal.onclick=function(ev){if(ev.target===modal)close();};var del=document.getElementById('photo-delete');if(del)del.onclick=function(){if(!confirm('\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0444\u043e\u0442\u043e \u043f\u0440\u043e\u0444\u0438\u043b\u044f?'))return;writeProfilePhoto(null).then(function(){if(profilePhotoURL)URL.revokeObjectURL(profilePhotoURL);profilePhotoURL='';profilePhotoDataURL='';close();renderApp();showToast('\u0424\u043e\u0442\u043e \u0443\u0434\u0430\u043b\u0435\u043d\u043e');}).catch(function(){error.textContent='\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0443\u0434\u0430\u043b\u0438\u0442\u044c \u0444\u043e\u0442\u043e.';});};
+      document.getElementById('photo-save').onclick=function(){if(!image)return;var out=document.createElement('canvas');out.width=out.height=512;out.getContext('2d').drawImage(canvas,0,0);out.toBlob(function(result){if(!result){error.textContent='\u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0444\u043e\u0442\u043e.';return;}writeProfilePhoto(result).then(function(){if(profilePhotoURL)URL.revokeObjectURL(profilePhotoURL);profilePhotoURL=URL.createObjectURL(result);close();renderApp();showToast('\u0424\u043e\u0442\u043e \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u043e');}).catch(function(){error.textContent='\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u0441\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c. \u0421\u0442\u0430\u0440\u043e\u0435 \u0444\u043e\u0442\u043e \u043d\u0435 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u043e.';});},'image/jpeg',0.9);};
+    }
+    function renderApp() {
+      document.body.setAttribute('data-auth-mode', authMode);
+      applyTheme();
+      var main = document.getElementById('main-content');
+      if (authMode === 'checking') {
+        main.innerHTML = '<section class="auth-shell"><div class="auth-panel" role="status">' + iconSvg('LockKeyhole', 24) + ' Проверяем сессию LifeSkill…</div></section>';
+        return;
+      }
+      if (authMode === 'signed-out') {
+        main.innerHTML = renderAuthView();
+        attachAuthHandlers();
+        return;
+      }
+      updateTopStats();
+      var headerPhoto=document.getElementById('header-profile-photo');
+      var photoSource = profilePhotoURL || profilePhotoDataURL;
+      if (headerPhoto) headerPhoto.innerHTML = escapeHtml(initials()) + (photoSource ? '<img src="' + photoSource + '" alt="" onerror="this.remove()">' : '');
+      renderNav();
+
+      if (state.page === 'home') main.innerHTML = renderHomeView();
+      else if (state.page === 'learn') main.innerHTML = renderLearnView();
+      else if (state.page === 'tools') main.innerHTML = renderToolsView();
+      else if (state.page === 'character') main.innerHTML = renderCharacterView();
+      else if (state.page === 'profile') main.innerHTML = renderProfileView();
+
+      attachEventHandlers();
+    }
+
+    function attachEventHandlers() {
+      // Navigation
+      document.querySelectorAll('[data-nav]').forEach(function(b) {
+        b.onclick = function() { navigateTo(b.getAttribute('data-nav')); };
+      });
+
+      // Brand Logo
+      var brandLogo = document.getElementById('brand-logo');
+      if (brandLogo) brandLogo.onclick = function() { navigateTo('home'); };
+
+      var headerPhotoButton=document.getElementById('header-profile-photo'); if(headerPhotoButton)headerPhotoButton.onclick=openPhotoEditor;
+      var editPhotoButton=document.getElementById('btn-edit-photo'); if(editPhotoButton)editPhotoButton.onclick=openPhotoEditor;
+
+      // Theme toggle
+      var themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.onclick = function() {
+          var currentIndex = THEME_CATALOG.findIndex(function(theme) { return theme.id === state.theme; });
+          setTheme(THEME_CATALOG[(currentIndex + 1) % THEME_CATALOG.length].id);
+        };
+      }
+
+      // Home actions
+      var btnCont = document.getElementById('btn-continue-lesson');
+      if (btnCont) {
+        btnCont.onclick = function() {
+          var nextInfo = getNextHomeLesson();
+          if (nextInfo) openLessonPlayer(nextInfo.lesson.id);
+          else navigateTo('learn');
+        };
+      }
+
+      var nextStepBtn = document.getElementById('btn-next-step');
+      if (nextStepBtn) nextStepBtn.onclick = function() {
+        var nextInfo = getNextHomeLesson();
+        if (nextInfo) openLessonPlayer(nextInfo.lesson.id);
+        else navigateTo('learn');
+      };
+
+      var btnFirstWeek = document.getElementById('btn-open-first-week');
+      if (btnFirstWeek) btnFirstWeek.onclick = openFirstWeekModal;
+
+      var btnMonthSim = document.getElementById('btn-open-month-sim');
+      if (btnMonthSim) btnMonthSim.onclick = openMonthSimModal;
+
+      var btnClaim = document.getElementById('btn-claim-daily');
+      if (btnClaim) btnClaim.onclick = claimDailyBonus;
+
+      document.querySelectorAll('[data-open-world]').forEach(function(b) {
+        b.onclick = function() {
+          var wid = b.getAttribute('data-open-world');
+          navigateTo('learn');
+          setTimeout(function() {
+            var el = document.getElementById('world-card-' + wid);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+        };
+      });
+
+      // Learn path nodes
+      document.querySelectorAll('[data-lesson-id]').forEach(function(b) {
+        b.onclick = function() {
+          var lid = b.getAttribute('data-lesson-id');
+          openLessonPlayer(lid);
+        };
+      });
+
+      var btnReview = document.getElementById('btn-review-mistakes');
+      if (btnReview) {
+        btnReview.onclick = function() {
+          var lids = Object.keys(state.reviewMistakes || {});
+          if (lids.length > 0) openLessonPlayer(lids[0]);
+        };
+      }
+
+      // Tools tabs
+      document.querySelectorAll('[data-tool-tab]').forEach(function(b) {
+        b.onclick = function() {
+          currentToolTab = b.getAttribute('data-tool-tab');
+          renderApp();
+        };
+      });
+
+      // Budget Calculator
+      var btnCalcBudget = document.getElementById('btn-calc-budget');
+      if (btnCalcBudget) {
+        btnCalcBudget.onclick = function() {
+          var inc = +document.getElementById('budget-income-input').value;
+          var np = +document.getElementById('budget-needs-input').value;
+          var wp = +document.getElementById('budget-wants-input').value;
+          var sp = +document.getElementById('budget-savings-input').value;
+
+          var res = Core.calculateBudget(inc, np, wp, sp);
+          if (res.valid) {
+            state.budgetPlan = { income: inc, needsPercent: np, wantsPercent: wp, savingsPercent: sp };
+            dailyMissionsDone(false);
+            saveState();
+            playSound('success');
+            showToast('Бюджет рассчитан и сохранён!');
+            renderApp();
+          } else {
+            playSound('error');
+            alert(res.error);
+          }
+        };
+      }
+
+      var cushionMonths = document.getElementById('cushion-months-select');
+      if (cushionMonths) {
+        var updateCushion = function() {
+          var exp = +document.getElementById('cushion-exp-input').value;
+          var m = +cushionMonths.value;
+          var cRes = Core.calculateSafetyCushion(exp, m);
+          var box = document.getElementById('cushion-result-box');
+          if (box) box.textContent = cRes.valid ? cRes.description : cRes.error;
+        };
+        cushionMonths.onchange = updateCushion;
+        document.getElementById('cushion-exp-input').oninput = updateCushion;
+        updateCushion();
+      }
+
+      // Eisenhower Matrix Actions
+      var btnAddM = document.getElementById('btn-add-matrix-task');
+      if (btnAddM) {
+        btnAddM.onclick = function() {
+          var inp = document.getElementById('new-matrix-task-text');
+          var q = +document.getElementById('new-matrix-task-q').value;
+          if (inp && inp.value.trim()) {
+            Core.addEisenhowerTask(state, inp.value.trim(), q);
+            dailyMissionsDone(false);
+            saveState();
+            renderApp();
+          }
+        };
+      }
+
+      document.querySelectorAll('[data-matrix-toggle]').forEach(function(chk) {
+        chk.onchange = function() {
+          var tid = +chk.getAttribute('data-matrix-toggle');
+          Core.toggleEisenhowerTask(state, tid, chk.checked);
+          saveState();
+          renderApp();
+        };
+      });
+
+      document.querySelectorAll('[data-matrix-del]').forEach(function(b) {
+        b.onclick = function() {
+          var tid = +b.getAttribute('data-matrix-del');
+          Core.deleteEisenhowerTask(state, tid);
+          saveState();
+          renderApp();
+        };
+      });
+
+      // Shopping List Actions
+      var btnAddShop = document.getElementById('btn-add-shop-item');
+      if (btnAddShop) {
+        btnAddShop.onclick = function() {
+          var name = document.getElementById('shop-new-name').value.trim();
+          var qty = +document.getElementById('shop-new-qty').value || 1;
+          var price = +document.getElementById('shop-new-price').value || 0;
+          if (name) {
+            state.shoppingList = state.shoppingList || [];
+            var nextId = state.shoppingList.length ? Math.max.apply(null, state.shoppingList.map(function(i) { return i.id || 0; })) + 1 : 1;
+            state.shoppingList.push({ id: nextId, name: name, qty: qty, unitPrice: price, done: false });
+            dailyMissionsDone(false);
+            saveState();
+            renderApp();
+          }
+        };
+      }
+
+      document.querySelectorAll('[data-shop-toggle]').forEach(function(chk) {
+        chk.onchange = function() {
+          var tid = +chk.getAttribute('data-shop-toggle');
+          var item = state.shoppingList.find(function(i) { return i.id === tid; });
+          if (item) item.done = chk.checked;
+          saveState();
+          renderApp();
+        };
+      });
+
+      document.querySelectorAll('[data-shop-del]').forEach(function(b) {
+        b.onclick = function() {
+          var tid = +b.getAttribute('data-shop-del');
+          state.shoppingList = state.shoppingList.filter(function(i) { return i.id !== tid; });
+          saveState();
+          renderApp();
+        };
+      });
+
+      var btnSaveShopBudget = document.getElementById('btn-save-shop-budget');
+      if (btnSaveShopBudget) {
+        btnSaveShopBudget.onclick = function() {
+          var b = +document.getElementById('shop-budget-limit-input').value;
+          state.shoppingBudget = Math.max(0, b);
+          saveState();
+          showToast('Лимит покупок обновлён!');
+          renderApp();
+        };
+      }
+
+      // Price Compare Action
+      var btnCalcComp = document.getElementById('btn-calc-compare');
+      if (btnCalcComp) {
+        btnCalcComp.onclick = function() {
+          var wa = +document.getElementById('comp-w-a').value;
+          var pa = +document.getElementById('comp-p-a').value;
+          var wb = +document.getElementById('comp-w-b').value;
+          var pb = +document.getElementById('comp-p-b').value;
+
+          var compRes = Core.compareProductPrices(
+            { name: 'Товар А', weight: wa, price: pa },
+            { name: 'Товар Б', weight: wb, price: pb }
+          );
+
+          var out = document.getElementById('compare-result-box');
+          if (compRes.valid) {
+            dailyMissionsDone(false);
+            out.innerHTML = '' +
+              '<div class="example-box">' +
+                '<b>Результат:</b> ' + escapeHtml(compRes.insight) + '<br>' +
+                'Товар А: <b>' + compRes.pricePerKgA.toLocaleString('ru-RU') + ' ₸/кг</b><br>' +
+                'Товар Б: <b>' + compRes.pricePerKgB.toLocaleString('ru-RU') + ' ₸/кг</b>' +
+              '</div>';
+          } else {
+            out.innerHTML = '<div class="badge-pill" style="color:var(--color-danger);">' + escapeHtml(compRes.error) + '</div>';
+          }
+        };
+      }
+
+      // STAR Constructor
+      var btnSaveStar = document.getElementById('btn-save-star');
+      if (btnSaveStar) {
+        btnSaveStar.onclick = function() {
+          var s = document.getElementById('star-s').value.trim();
+          var t = document.getElementById('star-t').value.trim();
+          var a = document.getElementById('star-a').value.trim();
+          var r = document.getElementById('star-r').value.trim();
+
+          var formatted = Core.formatStarStory(s, t, a, r);
+          if (formatted) {
+            state.starNotes = state.starNotes || [];
+            state.starNotes.push({ situation: s, task: t, action: a, result: r, combined: formatted, date: new Date().toISOString() });
+            dailyMissionsDone(false);
+            saveState();
+            playSound('success');
+            showToast('История по STAR сохранена!');
+            renderApp();
+          } else {
+            alert('Заполни хотя бы одно поле конструктора STAR.');
+          }
+        };
+      }
+
+      document.querySelectorAll('[data-copy-star]').forEach(function(b) {
+        b.onclick = function() {
+          var idx = +b.getAttribute('data-copy-star');
+          var note = state.starNotes[idx];
+          if (note && navigator.clipboard) {
+            navigator.clipboard.writeText(note.combined || note).then(function() {
+              showToast('📋 Текст скопирован в буфер обмена!');
+            });
+          }
+        };
+      });
+
+      // Laundry search
+      var laundrySearch = document.getElementById('laundry-search-input');
+      if (laundrySearch) {
+        laundrySearch.oninput = function() {
+          var q = laundrySearch.value.toLowerCase().trim();
+          var filtered = Data.LAUNDRY_SYMBOLS.filter(function(s) {
+            return s.name.toLowerCase().includes(q) || s.meaning.toLowerCase().includes(q);
+          });
+          var grid = document.getElementById('laundry-grid-container');
+          if (grid) {
+            grid.innerHTML = filtered.map(function(sym) {
+              return '' +
+                '<div class="col-4" style="background:var(--color-surface-subtle); border:1px solid var(--color-border); border-radius:var(--radius-button); padding:14px;">' +
+                  '<div style="font-size:24px; font-weight:900; margin-bottom:4px;">' + sym.icon + '</div>' +
+                  '<b>' + sym.name + '</b>' +
+                  '<p style="font-size:12.5px; color:var(--color-text-secondary); margin-top:4px;">' + sym.meaning + '</p>' +
+                '</div>';
+            }).join('');
+          }
+        };
+      }
+
+      // Wardrobe Shop buy & equip
+      document.querySelectorAll('[data-buy-item]').forEach(function(b) {
+        b.onclick = function() {
+          var iid = b.getAttribute('data-buy-item');
+          var item = Data.WARDROBE_ITEMS.find(function(i) { return i.id === iid; });
+          var res = Core.purchaseShopItem(state, item);
+          if (res.success) {
+            playSound('success');
+            showToast(res.message);
+            saveState();
+            renderApp();
+          } else {
+            playSound('error');
+            alert(res.reason);
+          }
+        };
+      });
+
+      document.querySelectorAll('[data-equip-item]').forEach(function(b) {
+        b.onclick = function() {
+          var iid = b.getAttribute('data-equip-item');
+          var type = b.getAttribute('data-item-type');
+          state.equippedItems[type] = iid;
+          saveState();
+          showToast('Предмет экипирован!');
+          renderApp();
+        };
+      });
+
+      var editProfileBtn = document.getElementById('btn-edit-profile');
+      if (editProfileBtn) editProfileBtn.onclick = openProfileEditor;
+      var themeSettingsBtn = document.getElementById('btn-open-theme-settings');
+      if (themeSettingsBtn) themeSettingsBtn.onclick = function() {
+        var themeSettings = document.getElementById('theme-settings');
+        if (themeSettings) themeSettings.scrollIntoView({ behavior: state.reducedMotion ? 'auto' : 'smooth' });
+      };
+
+      document.querySelectorAll('[data-theme-choice]').forEach(function(b) {
+        b.onclick = function() {
+          setTheme(b.getAttribute('data-theme-choice'));
+        };
+      });
+
+      var authStartButton = document.getElementById('btn-auth-start');
+      if (authStartButton) authStartButton.onclick = function() {
+        authPhase = 'email';
+        authError = '';
+        authMode = 'signed-out';
+        renderApp();
+      };
+
+      var logoutButton = document.getElementById('btn-auth-logout');
+      if (logoutButton) logoutButton.onclick = async function() {
+        logoutButton.disabled = true;
+        try {
+          if (authSaveTimer) {
+            clearTimeout(authSaveTimer);
+            authSaveTimer = null;
+            await authRequest('/api/account/state', 'PUT', { profile: accountProfilePayload(), gameState: accountGamePayload() });
+          }
+          await authRequest('/api/auth/logout', 'POST', {});
+          leaveServerAccount();
+        } catch (error) {
+          logoutButton.disabled = false;
+          showToast(error.message || 'Не удалось завершить сессию.');
+        }
+      };
+
+      var deleteAccountButton = document.getElementById('btn-auth-delete');
+      if (deleteAccountButton) deleteAccountButton.onclick = async function() {
+        if (!confirm('Удалить аккаунт LifeSkill, его игровой прогресс, фото и все серверные сессии? Это действие необратимо.')) return;
+        deleteAccountButton.disabled = true;
+        try {
+          await authRequest('/api/account', 'DELETE', { confirm: true });
+          leaveServerAccount();
+          showToast('Аккаунт и данные на сервере удалены.');
+        } catch (error) {
+          deleteAccountButton.disabled = false;
+          showToast(error.message || 'Не удалось удалить аккаунт.');
+        }
+      };
+
+      var soundChk = document.getElementById('profile-sound-chk');
+      if (soundChk) {
+        soundChk.onchange = function() {
+          state.soundEnabled = soundChk.checked;
+          saveState();
+        };
+      }
+
+      var motionChk = document.getElementById('profile-motion-chk');
+      if (motionChk) {
+        motionChk.onchange = function() {
+          state.reducedMotion = motionChk.checked;
+          saveState();
+          applyTheme();
+        };
+      }
+
+      var pressureChk = document.getElementById('profile-pressure-chk');
+      if (pressureChk) {
+        pressureChk.onchange = function() {
+          state.noPressure = pressureChk.checked;
+          saveState();
+          showToast(state.noPressure ? 'Режим «Без давления» включён: сердечки больше не теряются' : 'Режим «Без давления» выключен');
+        };
+      }
+
+      // Export / Import / Reset
+      var btnExport = document.getElementById('btn-export-json');
+      if (btnExport) {
+        btnExport.onclick = function() {
+          var blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'lifeskill-backup-v3.json';
+          a.click();
+          URL.revokeObjectURL(url);
+          showToast('💾 Резервная копия сохранена в файл!');
+        };
+      }
+
+      var inputImport = document.getElementById('input-import-json');
+      if (inputImport) {
+        inputImport.onchange = function(e) {
+          var file = e.target.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function() {
+            try {
+              var parsed = JSON.parse(reader.result);
+              if (Core.validateSaveState(parsed)) {
+                state = Core.migrateSaveState(parsed);
+                saveState();
+                playSound('success');
+                showToast('Прогресс успешно восстановлен!');
+                renderApp();
+              } else {
+                throw new Error('Invalid structure');
+              }
+            } catch(err) {
+              playSound('error');
+              alert('Не удалось прочитать файл резервной копии. Проверьте формат.');
+            }
+          };
+          reader.readAsText(file);
+        };
+      }
+
+      var btnReset = document.getElementById('btn-reset-all');
+      if (btnReset) {
+        btnReset.onclick = function() {
+          if (confirm('ВНИМАНИЕ! Вы действительно хотите сбросить весь прогресс, достижения и монеты? Это действие необратимо.')) {
+            localStorage.removeItem(Core.STORAGE_KEY);
+            localStorage.removeItem(Core.BACKUP_KEY);
+            state = Core.getInitialState();
+            saveState();
+            showToast('Прогресс сброшен. Путь начат заново!');
+            renderApp();
+          }
+        };
+      }
+    }
+
+    // Local files remain available offline; HTTP deployments check the server cookie first.
+    initializeAuth();
+
+  })();
+  </script>
+</body>
+</html>
+
